@@ -16,7 +16,7 @@
   --success-color: #00f2fe;
   --warning-color: #fee140;
 
-  /* Dark Theme Colors */
+  /* Dark Theme Colors (default) */
   --bg-primary: #0f1117;
   --bg-secondary: #1a1d29;
   --bg-tertiary: #252836;
@@ -58,6 +58,25 @@
     sans-serif;
 }
 
+/* Light Theme */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f5;
+  --bg-card: #ffffff;
+  --bg-hover: #e9ecef;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.15);
+}
+
 /* ============================================
    Reset & Base Styles
    ============================================ */
@@ -78,6 +97,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
 /* ============================================
@@ -191,6 +211,55 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-hover);
+  transform: scale(1.05);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  transition: all var(--transition-normal);
+}
+
+.sun-icon {
+  opacity: 0;
+  transform: rotate(180deg) scale(0);
+}
+
+.moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  color: var(--primary-color);
+}
+
+[data-theme="light"] .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  color: var(--primary-color);
+}
+
+[data-theme="light"] .moon-icon {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
 }
 
 @keyframes pulse {
@@ -688,6 +757,7 @@ body {
 .gauge-bg {
   stroke-dasharray: 251.2;
   stroke-dashoffset: 0;
+  stroke: var(--border-color);
 }
 
 .gauge-fill {

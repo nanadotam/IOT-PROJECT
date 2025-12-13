@@ -64,6 +64,7 @@ function generateDeviceData(deviceId) {
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 Initializing Smart Poultry Heater Control System...");
 
+  initializeTheme();
   initializeDevices();
   initializeCharts();
   setupEventListeners();
@@ -71,6 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("✅ System initialized successfully!");
 });
+
+// ============================================
+// Theme Management
+// ============================================
+
+function initializeTheme() {
+  // Check for saved theme preference or default to 'dark'
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  console.log(`🎨 Theme initialized: ${savedTheme}`);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+
+  console.log(`🎨 Theme switched to: ${newTheme}`);
+}
 
 // ============================================
 // Device Management
@@ -417,6 +439,10 @@ function initializeCharts() {
 }
 
 function getChartOptions(unit) {
+  const theme = document.documentElement.getAttribute("data-theme") || "dark";
+  const gridColor = theme === "light" ? "#e5e7eb" : "#2a2d3a";
+  const textColor = theme === "light" ? "#6c757d" : "#a0a3bd";
+
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -430,6 +456,10 @@ function getChartOptions(unit) {
             return context.parsed.y.toFixed(1) + unit;
           },
         },
+        backgroundColor:
+          theme === "light" ? "rgba(0, 0, 0, 0.8)" : "rgba(30, 33, 48, 0.9)",
+        titleColor: "#ffffff",
+        bodyColor: "#ffffff",
       },
     },
     scales: {
@@ -499,6 +529,12 @@ function updateChart(chart, label, value) {
 // ============================================
 
 function setupEventListeners() {
+  // Theme toggle button
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+  }
+
   // Refresh devices button
   const refreshBtn = document.getElementById("refresh-devices");
   if (refreshBtn) {

@@ -1,0 +1,22 @@
+# Python Requirements for Smart Poultry Heater Control System
+
+# MQTT Client
+paho-mqtt==1.6.1
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Machine Learning
+scikit-learn==1.3.2
+joblib==1.3.2
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# Database (SQLite is built-in to Python)
+# No additional package needed
+
+# Optional: For advanced MQTT features
+# paho-mqtt[tls]==1.6.1
