@@ -1,9 +1,13 @@
 # Python Requirements for Smart Poultry Heater Control System
+# Install with: pip install -r requirements.txt
 
 # MQTT Client
 paho-mqtt==1.6.1
 
-# Data Processing
+# MySQL Database Connector
+mysql-connector-python==8.2.0
+
+# Data Processing (for ML pipeline)
 pandas==2.1.4
 numpy==1.26.2
 
@@ -11,12 +15,10 @@ numpy==1.26.2
 scikit-learn==1.3.2
 joblib==1.3.2
 
-# Visualization
+# Visualization (for ML pipeline)
 matplotlib==3.8.2
 seaborn==0.13.0
 
-# Database (SQLite is built-in to Python)
-# No additional package needed
+# Configuration Management
+python-dotenv==1.0.0
 
-# Optional: For advanced MQTT features
-# paho-mqtt[tls]==1.6.1

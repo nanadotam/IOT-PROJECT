@@ -173,19 +173,34 @@ CREATE TABLE system_logs (
 
 ### Topic Hierarchy
 
+Device1_ldr
+Device2_ldr
+Device3_ldr
+Device1_temp
+Device2_temp
+Device3_temp
+Device1_humidity
+Device2_humidity
+Device3_humidity
+
+
+
 ```
 poultry/
 ├── sensors/
-│   ├── device1
-│   ├── device2
-│   ├── device3
-│   ├── device4
-│   ├── device5
-│   └── device6
+│   ├── device1_ldr
+│   ├── device1_temp
+│   ├── device1_humidity
+│   ├── device2_ldr
+│   ├── device2_temp
+│   ├── device2_humidity
+│   ├── device3_ldr
+│   ├── device3_temp
+│   └── device3_humidity
 ├── control/
 │   ├── device1
 │   ├── device2
-│   └── ...
+│   └── device3
 └── devices/
     └── status
 ```
