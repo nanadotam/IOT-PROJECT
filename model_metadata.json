@@ -1,0 +1,21 @@
+{
+  "model_name": "Random Forest",
+  "features": [
+    "Temp",
+    "Humidity",
+    "LDR"
+  ],
+  "target": "Heater",
+  "performance": {
+    "accuracy": 0.8553333333333333,
+    "precision": 0.8457671099578333,
+    "recall": 0.8691666666666666,
+    "f1_score": 0.857307249712313,
+    "roc_auc": 0.9252224166666667
+  },
+  "data_info": {
+    "total_samples": 60000,
+    "training_samples": 48000,
+    "test_samples": 12000
+  }
+}
