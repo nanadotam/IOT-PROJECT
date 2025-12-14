@@ -1,0 +1,221 @@
+2025-12-14 16:59:21,520 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 16:59:21,537 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 16:59:21,541 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 16:59:21,541 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 16:59:21,541 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - ✅ MQTT Bridge initialized successfully
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - 📊 Database: poultry_control@localhost
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - 📡 MQTT Broker: localhost:1883
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - 🎯 Subscribed to 5 topics
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - 
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - Press Ctrl+C to stop...
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - ================================================================================
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - 
+2025-12-14 16:59:21,542 - MQTTBridge - INFO - 🚀 Starting MQTT bridge...
+2025-12-14 16:59:21,543 - MQTTBridge - INFO - ✅ Connected to MQTT broker
+2025-12-14 16:59:21,543 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device1/sensors (QoS 1)
+2025-12-14 16:59:21,543 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device2/sensors (QoS 1)
+2025-12-14 16:59:21,543 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device3/sensors (QoS 1)
+2025-12-14 16:59:21,543 - MQTTBridge - INFO - 📡 Subscribed to: poultry/control/# (QoS 1)
+2025-12-14 16:59:21,543 - MQTTBridge - INFO - 📡 Subscribed to: poultry/status (QoS 1)
+2025-12-14 17:00:59,510 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 1] - Device 1: Temp=19.55°C, Humidity=94.36%, LDR=23.37%, Heater=ON
+2025-12-14 17:01:00,012 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 2] - Device 2: Temp=28.49°C, Humidity=95.59%, LDR=76.92%, Heater=ON
+2025-12-14 17:01:00,515 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 3] - Device 3: Temp=20.8°C, Humidity=79.09%, LDR=23.91%, Heater=ON
+2025-12-14 17:01:36,584 - MQTTBridge - INFO - 🎛️  Control command stored [ID: 1] - Device 1: heater=1
+2025-12-14 17:01:37,586 - MQTTBridge - INFO - 🎛️  Control command stored [ID: 2] - Device 2: heater=0
+2025-12-14 17:01:38,591 - MQTTBridge - INFO - 🎛️  Control command stored [ID: 3] - Device 3: heater=1
+2025-12-14 17:17:06,130 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 4] - Device 1: Temp=34.38°C, Humidity=77.98%, LDR=2.76%, Heater=OFF
+2025-12-14 17:17:06,628 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 5] - Device 2: Temp=30.55°C, Humidity=61.43%, LDR=77.58%, Heater=OFF
+2025-12-14 17:17:07,132 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 6] - Device 3: Temp=25.74°C, Humidity=93.17%, LDR=45.66%, Heater=ON
+2025-12-14 17:17:12,643 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 7] - Device 1: Temp=27.73°C, Humidity=64.36%, LDR=20.53%, Heater=OFF
+2025-12-14 17:17:13,147 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 8] - Device 2: Temp=34.64°C, Humidity=89.22%, LDR=12.64%, Heater=ON
+2025-12-14 17:17:13,650 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 9] - Device 3: Temp=37.94°C, Humidity=68.91%, LDR=31.55%, Heater=OFF
+2025-12-14 17:17:19,158 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 10] - Device 1: Temp=25.19°C, Humidity=98.34%, LDR=78.45%, Heater=ON
+2025-12-14 17:17:19,665 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 11] - Device 2: Temp=22.0°C, Humidity=89.79%, LDR=12.77%, Heater=ON
+2025-12-14 17:17:20,166 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 12] - Device 3: Temp=33.53°C, Humidity=79.91%, LDR=72.71%, Heater=OFF
+2025-12-14 17:17:25,675 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 13] - Device 1: Temp=31.81°C, Humidity=66.77%, LDR=19.58%, Heater=OFF
+2025-12-14 17:17:26,176 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 14] - Device 2: Temp=28.59°C, Humidity=91.8%, LDR=1.88%, Heater=ON
+2025-12-14 17:17:26,681 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 15] - Device 3: Temp=33.36°C, Humidity=68.21%, LDR=84.03%, Heater=OFF
+2025-12-14 17:17:32,191 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 16] - Device 1: Temp=20.51°C, Humidity=73.03%, LDR=29.41%, Heater=ON
+2025-12-14 17:17:32,696 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 17] - Device 2: Temp=33.87°C, Humidity=68.31%, LDR=61.59%, Heater=OFF
+2025-12-14 17:17:33,198 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 18] - Device 3: Temp=21.49°C, Humidity=69.25%, LDR=43.67%, Heater=ON
+2025-12-14 17:17:38,704 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 19] - Device 1: Temp=20.85°C, Humidity=77.65%, LDR=77.68%, Heater=ON
+2025-12-14 17:17:39,209 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 20] - Device 2: Temp=20.39°C, Humidity=93.53%, LDR=31.44%, Heater=ON
+2025-12-14 17:17:39,710 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 21] - Device 3: Temp=32.03°C, Humidity=71.64%, LDR=86.59%, Heater=OFF
+2025-12-14 17:17:45,220 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 22] - Device 1: Temp=26.01°C, Humidity=78.68%, LDR=29.38%, Heater=OFF
+2025-12-14 17:17:45,725 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 23] - Device 2: Temp=34.03°C, Humidity=64.14%, LDR=16.46%, Heater=OFF
+2025-12-14 17:17:46,229 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 24] - Device 3: Temp=18.1°C, Humidity=73.84%, LDR=30.19%, Heater=ON
+2025-12-14 17:17:51,736 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 25] - Device 1: Temp=28.17°C, Humidity=92.08%, LDR=34.59%, Heater=ON
+2025-12-14 17:17:52,240 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 26] - Device 2: Temp=21.58°C, Humidity=60.72%, LDR=3.48%, Heater=ON
+2025-12-14 17:17:52,744 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 27] - Device 3: Temp=30.45°C, Humidity=76.78%, LDR=17.16%, Heater=OFF
+2025-12-14 17:17:58,255 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 28] - Device 1: Temp=27.2°C, Humidity=88.99%, LDR=29.64%, Heater=ON
+2025-12-14 17:17:58,756 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 29] - Device 2: Temp=21.81°C, Humidity=85.95%, LDR=79.69%, Heater=ON
+2025-12-14 17:17:59,258 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 30] - Device 3: Temp=24.91°C, Humidity=80.92%, LDR=35.9%, Heater=ON
+2025-12-14 17:18:04,760 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 31] - Device 1: Temp=31.4°C, Humidity=70.96%, LDR=92.18%, Heater=OFF
+2025-12-14 17:18:05,264 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 32] - Device 2: Temp=23.02°C, Humidity=87.91%, LDR=44.35%, Heater=ON
+2025-12-14 17:18:05,771 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 33] - Device 3: Temp=31.51°C, Humidity=90.69%, LDR=18.27%, Heater=ON
+2025-12-14 17:18:11,277 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 34] - Device 1: Temp=35.09°C, Humidity=81.33%, LDR=15.45%, Heater=OFF
+2025-12-14 17:18:11,776 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 35] - Device 2: Temp=37.95°C, Humidity=64.61%, LDR=86.91%, Heater=OFF
+2025-12-14 17:18:12,281 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 36] - Device 3: Temp=27.25°C, Humidity=61.39%, LDR=72.27%, Heater=OFF
+2025-12-14 17:18:17,790 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 37] - Device 1: Temp=25.03°C, Humidity=94.5%, LDR=17.45%, Heater=ON
+2025-12-14 17:18:18,293 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 38] - Device 2: Temp=22.77°C, Humidity=96.33%, LDR=18.03%, Heater=ON
+2025-12-14 17:18:18,792 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 39] - Device 3: Temp=30.01°C, Humidity=62.13%, LDR=64.91%, Heater=OFF
+2025-12-14 17:18:24,306 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 40] - Device 1: Temp=21.21°C, Humidity=89.58%, LDR=56.9%, Heater=ON
+2025-12-14 17:18:24,807 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 41] - Device 2: Temp=23.48°C, Humidity=67.43%, LDR=9.04%, Heater=ON
+2025-12-14 17:18:25,313 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 42] - Device 3: Temp=20.58°C, Humidity=69.94%, LDR=49.58%, Heater=ON
+2025-12-14 17:18:30,822 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 43] - Device 1: Temp=34.35°C, Humidity=84.56%, LDR=41.98%, Heater=OFF
+2025-12-14 17:18:31,331 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 44] - Device 2: Temp=36.65°C, Humidity=68.86%, LDR=65.99%, Heater=OFF
+2025-12-14 17:18:31,832 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 45] - Device 3: Temp=37.2°C, Humidity=70.83%, LDR=94.23%, Heater=OFF
+2025-12-14 17:18:37,336 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 46] - Device 1: Temp=30.75°C, Humidity=68.02%, LDR=32.64%, Heater=OFF
+2025-12-14 17:18:37,838 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 47] - Device 2: Temp=33.32°C, Humidity=65.99%, LDR=99.81%, Heater=OFF
+2025-12-14 17:18:38,344 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 48] - Device 3: Temp=20.45°C, Humidity=69.26%, LDR=66.25%, Heater=ON
+2025-12-14 17:18:43,851 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 49] - Device 1: Temp=25.07°C, Humidity=77.6%, LDR=57.19%, Heater=OFF
+2025-12-14 17:18:44,359 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 50] - Device 2: Temp=33.42°C, Humidity=93.7%, LDR=33.84%, Heater=ON
+2025-12-14 17:18:44,860 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 51] - Device 3: Temp=22.83°C, Humidity=92.19%, LDR=16.16%, Heater=ON
+2025-12-14 17:18:50,367 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 52] - Device 1: Temp=24.57°C, Humidity=78.58%, LDR=37.56%, Heater=ON
+2025-12-14 17:18:50,872 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 53] - Device 2: Temp=25.99°C, Humidity=77.46%, LDR=62.94%, Heater=OFF
+2025-12-14 17:18:51,373 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 54] - Device 3: Temp=18.83°C, Humidity=78.01%, LDR=68.49%, Heater=ON
+2025-12-14 17:18:56,882 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 55] - Device 1: Temp=25.12°C, Humidity=73.54%, LDR=90.2%, Heater=OFF
+2025-12-14 17:18:57,389 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 56] - Device 2: Temp=34.71°C, Humidity=89.74%, LDR=40.95%, Heater=ON
+2025-12-14 17:18:57,889 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 57] - Device 3: Temp=19.68°C, Humidity=84.77%, LDR=63.94%, Heater=ON
+2025-12-14 17:19:03,401 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 58] - Device 1: Temp=24.72°C, Humidity=81.88%, LDR=13.88%, Heater=ON
+2025-12-14 17:19:03,904 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 59] - Device 2: Temp=32.21°C, Humidity=61.51%, LDR=50.58%, Heater=OFF
+2025-12-14 17:19:04,406 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 60] - Device 3: Temp=23.08°C, Humidity=61.7%, LDR=50.45%, Heater=ON
+2025-12-14 17:19:09,910 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 61] - Device 1: Temp=28.75°C, Humidity=60.41%, LDR=88.99%, Heater=OFF
+2025-12-14 17:19:10,415 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 62] - Device 2: Temp=27.92°C, Humidity=98.66%, LDR=80.34%, Heater=ON
+2025-12-14 17:19:10,924 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 63] - Device 3: Temp=24.72°C, Humidity=91.82%, LDR=22.62%, Heater=ON
+2025-12-14 17:19:16,424 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 64] - Device 1: Temp=21.65°C, Humidity=69.75%, LDR=46.32%, Heater=ON
+2025-12-14 17:19:16,929 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 65] - Device 2: Temp=34.71°C, Humidity=64.26%, LDR=10.9%, Heater=OFF
+2025-12-14 17:19:17,434 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 66] - Device 3: Temp=22.16°C, Humidity=66.02%, LDR=54.07%, Heater=ON
+2025-12-14 17:19:22,945 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 67] - Device 1: Temp=19.55°C, Humidity=93.2%, LDR=6.5%, Heater=ON
+2025-12-14 17:19:23,443 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 68] - Device 2: Temp=37.56°C, Humidity=85.43%, LDR=27.22%, Heater=ON
+2025-12-14 17:19:23,946 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 69] - Device 3: Temp=29.44°C, Humidity=72.2%, LDR=58.84%, Heater=OFF
+2025-12-14 17:19:29,458 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 70] - Device 1: Temp=36.1°C, Humidity=95.89%, LDR=36.93%, Heater=ON
+2025-12-14 17:19:29,958 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 71] - Device 2: Temp=21.82°C, Humidity=80.94%, LDR=67.89%, Heater=ON
+2025-12-14 17:19:30,459 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 72] - Device 3: Temp=28.27°C, Humidity=92.86%, LDR=85.26%, Heater=ON
+2025-12-14 17:19:35,967 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 73] - Device 1: Temp=21.25°C, Humidity=84.48%, LDR=44.5%, Heater=ON
+2025-12-14 17:19:36,468 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 74] - Device 2: Temp=18.56°C, Humidity=91.73%, LDR=29.23%, Heater=ON
+2025-12-14 17:19:36,970 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 75] - Device 3: Temp=25.55°C, Humidity=71.47%, LDR=87.19%, Heater=OFF
+2025-12-14 17:19:42,478 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 76] - Device 1: Temp=27.36°C, Humidity=73.97%, LDR=88.04%, Heater=OFF
+2025-12-14 17:19:42,984 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 77] - Device 2: Temp=24.32°C, Humidity=94.96%, LDR=98.67%, Heater=ON
+2025-12-14 17:19:43,488 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 78] - Device 3: Temp=18.44°C, Humidity=63.17%, LDR=87.05%, Heater=ON
+2025-12-14 17:19:49,001 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 79] - Device 1: Temp=18.39°C, Humidity=98.98%, LDR=84.78%, Heater=ON
+2025-12-14 17:19:49,499 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 80] - Device 2: Temp=20.34°C, Humidity=85.68%, LDR=32.57%, Heater=ON
+2025-12-14 17:19:50,005 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 81] - Device 3: Temp=33.18°C, Humidity=71.52%, LDR=28.71%, Heater=OFF
+2025-12-14 17:19:55,513 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 82] - Device 1: Temp=33.9°C, Humidity=78.48%, LDR=18.72%, Heater=OFF
+2025-12-14 17:19:56,018 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 83] - Device 2: Temp=26.41°C, Humidity=75.12%, LDR=42.07%, Heater=OFF
+2025-12-14 17:19:56,523 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 84] - Device 3: Temp=26.32°C, Humidity=88.82%, LDR=11.73%, Heater=ON
+2025-12-14 17:20:02,032 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 85] - Device 1: Temp=27.23°C, Humidity=80.47%, LDR=59.53%, Heater=OFF
+2025-12-14 17:20:02,534 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 86] - Device 2: Temp=20.77°C, Humidity=65.73%, LDR=92.28%, Heater=ON
+2025-12-14 17:20:03,037 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 87] - Device 3: Temp=19.5°C, Humidity=94.39%, LDR=78.41%, Heater=ON
+2025-12-14 17:20:08,548 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 88] - Device 1: Temp=26.94°C, Humidity=80.65%, LDR=69.88%, Heater=OFF
+2025-12-14 17:20:09,051 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 89] - Device 2: Temp=26.42°C, Humidity=77.03%, LDR=85.7%, Heater=OFF
+2025-12-14 17:20:09,555 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 90] - Device 3: Temp=31.7°C, Humidity=74.45%, LDR=21.39%, Heater=OFF
+2025-12-14 17:20:15,061 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 91] - Device 1: Temp=28.44°C, Humidity=93.89%, LDR=72.42%, Heater=ON
+2025-12-14 17:20:15,566 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 92] - Device 2: Temp=19.15°C, Humidity=96.52%, LDR=37.38%, Heater=ON
+2025-12-14 17:20:16,071 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 93] - Device 3: Temp=20.47°C, Humidity=70.68%, LDR=90.35%, Heater=ON
+2025-12-14 17:20:21,577 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 94] - Device 1: Temp=22.34°C, Humidity=69.77%, LDR=13.16%, Heater=ON
+2025-12-14 17:20:22,079 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 95] - Device 2: Temp=26.66°C, Humidity=90.55%, LDR=79.92%, Heater=ON
+2025-12-14 17:20:22,586 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 96] - Device 3: Temp=18.81°C, Humidity=76.89%, LDR=4.64%, Heater=ON
+2025-12-14 17:20:28,094 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 97] - Device 1: Temp=18.07°C, Humidity=66.57%, LDR=12.68%, Heater=ON
+2025-12-14 17:20:28,595 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 98] - Device 2: Temp=25.65°C, Humidity=72.34%, LDR=46.3%, Heater=OFF
+2025-12-14 17:20:29,103 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 99] - Device 3: Temp=25.5°C, Humidity=82.34%, LDR=14.24%, Heater=OFF
+2025-12-14 17:20:34,605 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 100] - Device 1: Temp=25.77°C, Humidity=69.06%, LDR=83.62%, Heater=OFF
+2025-12-14 17:20:35,107 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 101] - Device 2: Temp=27.84°C, Humidity=82.62%, LDR=9.23%, Heater=OFF
+2025-12-14 17:20:35,611 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 102] - Device 3: Temp=20.84°C, Humidity=68.5%, LDR=72.07%, Heater=ON
+2025-12-14 17:20:41,119 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 103] - Device 1: Temp=30.21°C, Humidity=85.14%, LDR=33.93%, Heater=ON
+2025-12-14 17:20:41,621 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 104] - Device 2: Temp=24.46°C, Humidity=93.53%, LDR=11.95%, Heater=ON
+2025-12-14 17:20:42,127 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 105] - Device 3: Temp=23.32°C, Humidity=65.38%, LDR=38.98%, Heater=ON
+2025-12-14 17:20:47,633 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 106] - Device 1: Temp=29.76°C, Humidity=60.61%, LDR=6.67%, Heater=OFF
+2025-12-14 17:20:48,139 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 107] - Device 2: Temp=29.11°C, Humidity=63.83%, LDR=43.5%, Heater=OFF
+2025-12-14 17:20:48,644 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 108] - Device 3: Temp=19.75°C, Humidity=66.8%, LDR=82.58%, Heater=ON
+2025-12-14 17:20:54,150 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 109] - Device 1: Temp=37.86°C, Humidity=98.99%, LDR=22.49%, Heater=ON
+2025-12-14 17:20:54,654 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 110] - Device 2: Temp=29.77°C, Humidity=73.79%, LDR=3.59%, Heater=OFF
+2025-12-14 17:20:55,158 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 111] - Device 3: Temp=35.28°C, Humidity=80.0%, LDR=95.04%, Heater=OFF
+2025-12-14 17:21:00,665 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 112] - Device 1: Temp=18.19°C, Humidity=72.58%, LDR=75.87%, Heater=ON
+2025-12-14 17:21:01,174 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 113] - Device 2: Temp=28.82°C, Humidity=91.42%, LDR=85.72%, Heater=ON
+2025-12-14 17:21:01,673 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 114] - Device 3: Temp=23.46°C, Humidity=75.19%, LDR=42.01%, Heater=ON
+2025-12-14 17:21:07,180 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 115] - Device 1: Temp=26.83°C, Humidity=82.45%, LDR=20.79%, Heater=OFF
+2025-12-14 17:21:07,682 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 116] - Device 2: Temp=31.22°C, Humidity=88.07%, LDR=81.25%, Heater=ON
+2025-12-14 17:21:08,185 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 117] - Device 3: Temp=32.22°C, Humidity=77.1%, LDR=71.72%, Heater=OFF
+2025-12-14 17:21:13,694 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 118] - Device 1: Temp=35.49°C, Humidity=93.04%, LDR=26.05%, Heater=ON
+2025-12-14 17:21:14,200 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 119] - Device 2: Temp=23.36°C, Humidity=77.96%, LDR=92.32%, Heater=ON
+2025-12-14 17:21:14,705 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 120] - Device 3: Temp=23.72°C, Humidity=99.64%, LDR=83.65%, Heater=ON
+2025-12-14 17:21:20,211 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 121] - Device 1: Temp=27.96°C, Humidity=87.61%, LDR=74.09%, Heater=ON
+2025-12-14 17:21:20,716 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 122] - Device 2: Temp=19.19°C, Humidity=86.45%, LDR=71.41%, Heater=ON
+2025-12-14 17:21:21,220 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 123] - Device 3: Temp=31.31°C, Humidity=84.05%, LDR=6.38%, Heater=OFF
+2025-12-14 17:21:26,728 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 124] - Device 1: Temp=26.97°C, Humidity=68.75%, LDR=71.02%, Heater=OFF
+2025-12-14 17:21:27,234 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 125] - Device 2: Temp=29.76°C, Humidity=67.3%, LDR=73.76%, Heater=OFF
+2025-12-14 17:21:27,739 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 126] - Device 3: Temp=21.31°C, Humidity=60.97%, LDR=77.57%, Heater=ON
+2025-12-14 17:21:33,245 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 127] - Device 1: Temp=26.04°C, Humidity=64.97%, LDR=35.64%, Heater=OFF
+2025-12-14 17:21:33,747 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 128] - Device 2: Temp=29.71°C, Humidity=76.11%, LDR=78.26%, Heater=OFF
+2025-12-14 17:21:34,249 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 129] - Device 3: Temp=33.64°C, Humidity=88.97%, LDR=58.41%, Heater=ON
+2025-12-14 17:21:39,757 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 130] - Device 1: Temp=28.88°C, Humidity=78.17%, LDR=45.75%, Heater=OFF
+2025-12-14 17:21:40,256 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 131] - Device 2: Temp=25.6°C, Humidity=68.68%, LDR=24.95%, Heater=OFF
+2025-12-14 17:21:40,763 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 132] - Device 3: Temp=22.65°C, Humidity=70.16%, LDR=75.67%, Heater=ON
+2025-12-14 17:21:46,268 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 133] - Device 1: Temp=34.9°C, Humidity=86.01%, LDR=53.65%, Heater=ON
+2025-12-14 17:21:46,773 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 134] - Device 2: Temp=24.55°C, Humidity=89.78%, LDR=67.43%, Heater=ON
+2025-12-14 17:21:47,276 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 135] - Device 3: Temp=23.96°C, Humidity=67.54%, LDR=75.77%, Heater=ON
+2025-12-14 17:21:52,785 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 136] - Device 1: Temp=34.94°C, Humidity=97.04%, LDR=58.65%, Heater=ON
+2025-12-14 17:21:53,290 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 137] - Device 2: Temp=26.29°C, Humidity=74.16%, LDR=64.82%, Heater=OFF
+2025-12-14 17:21:53,795 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 138] - Device 3: Temp=36.11°C, Humidity=89.66%, LDR=53.93%, Heater=ON
+2025-12-14 17:21:59,303 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 139] - Device 1: Temp=18.73°C, Humidity=78.62%, LDR=69.49%, Heater=ON
+2025-12-14 17:21:59,805 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 140] - Device 2: Temp=36.56°C, Humidity=94.98%, LDR=32.58%, Heater=ON
+2025-12-14 17:22:00,311 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 141] - Device 3: Temp=27.59°C, Humidity=91.73%, LDR=27.73%, Heater=ON
+2025-12-14 17:22:05,818 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 142] - Device 1: Temp=35.16°C, Humidity=67.07%, LDR=25.63%, Heater=OFF
+2025-12-14 17:22:06,323 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 143] - Device 2: Temp=30.95°C, Humidity=65.3%, LDR=83.79%, Heater=OFF
+2025-12-14 17:22:06,827 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 144] - Device 3: Temp=35.21°C, Humidity=84.46%, LDR=97.26%, Heater=OFF
+2025-12-14 17:22:12,333 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 145] - Device 1: Temp=32.65°C, Humidity=99.13%, LDR=58.64%, Heater=ON
+2025-12-14 17:22:12,836 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 146] - Device 2: Temp=22.17°C, Humidity=89.32%, LDR=51.61%, Heater=ON
+2025-12-14 17:22:13,343 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 147] - Device 3: Temp=23.52°C, Humidity=78.6%, LDR=93.29%, Heater=ON
+2025-12-14 17:22:18,849 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 148] - Device 1: Temp=21.21°C, Humidity=70.84%, LDR=75.7%, Heater=ON
+2025-12-14 17:22:19,353 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 149] - Device 2: Temp=33.33°C, Humidity=84.57%, LDR=5.56%, Heater=OFF
+2025-12-14 17:22:19,853 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 150] - Device 3: Temp=35.8°C, Humidity=88.29%, LDR=54.36%, Heater=ON
+2025-12-14 17:22:25,354 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 151] - Device 1: Temp=34.96°C, Humidity=95.9%, LDR=57.91%, Heater=ON
+2025-12-14 17:22:25,860 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 152] - Device 2: Temp=36.45°C, Humidity=75.4%, LDR=75.33%, Heater=OFF
+2025-12-14 17:22:26,363 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 153] - Device 3: Temp=20.53°C, Humidity=73.32%, LDR=55.18%, Heater=ON
+2025-12-14 17:22:31,872 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 154] - Device 1: Temp=22.25°C, Humidity=70.64%, LDR=50.36%, Heater=ON
+2025-12-14 17:22:32,377 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 155] - Device 2: Temp=37.94°C, Humidity=89.33%, LDR=74.82%, Heater=ON
+2025-12-14 17:22:32,881 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 156] - Device 3: Temp=23.44°C, Humidity=85.5%, LDR=23.33%, Heater=ON
+2025-12-14 17:22:38,391 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 157] - Device 1: Temp=20.47°C, Humidity=76.52%, LDR=59.25%, Heater=ON
+2025-12-14 17:22:38,892 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 158] - Device 2: Temp=34.15°C, Humidity=81.03%, LDR=88.19%, Heater=OFF
+2025-12-14 17:22:39,398 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 159] - Device 3: Temp=24.44°C, Humidity=97.93%, LDR=85.86%, Heater=ON
+2025-12-14 17:22:44,906 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 160] - Device 1: Temp=34.77°C, Humidity=89.4%, LDR=19.24%, Heater=ON
+2025-12-14 17:22:45,411 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 161] - Device 2: Temp=37.34°C, Humidity=96.18%, LDR=69.22%, Heater=ON
+2025-12-14 17:22:45,912 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 162] - Device 3: Temp=29.16°C, Humidity=71.76%, LDR=17.74%, Heater=OFF
+2025-12-14 17:22:51,422 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 163] - Device 1: Temp=24.14°C, Humidity=65.53%, LDR=33.25%, Heater=ON
+2025-12-14 17:22:51,926 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 164] - Device 2: Temp=25.34°C, Humidity=64.21%, LDR=2.36%, Heater=OFF
+2025-12-14 17:22:52,430 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 165] - Device 3: Temp=22.06°C, Humidity=66.95%, LDR=22.97%, Heater=ON
+2025-12-14 17:22:57,932 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 166] - Device 1: Temp=25.93°C, Humidity=99.2%, LDR=57.0%, Heater=ON
+2025-12-14 17:22:58,437 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 167] - Device 2: Temp=19.48°C, Humidity=80.23%, LDR=92.28%, Heater=ON
+2025-12-14 17:22:58,938 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 168] - Device 3: Temp=20.01°C, Humidity=97.39%, LDR=44.53%, Heater=ON
+2025-12-14 17:23:04,446 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 169] - Device 1: Temp=36.04°C, Humidity=69.56%, LDR=73.3%, Heater=OFF
+2025-12-14 17:23:04,949 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 170] - Device 2: Temp=18.13°C, Humidity=78.38%, LDR=40.31%, Heater=ON
+2025-12-14 17:23:05,453 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 171] - Device 3: Temp=29.27°C, Humidity=84.67%, LDR=86.83%, Heater=OFF
+2025-12-14 17:23:10,958 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 172] - Device 1: Temp=34.55°C, Humidity=65.48%, LDR=12.75%, Heater=OFF
+2025-12-14 17:23:11,460 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 173] - Device 2: Temp=28.99°C, Humidity=72.6%, LDR=31.21%, Heater=OFF
+2025-12-14 17:23:11,962 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 174] - Device 3: Temp=21.83°C, Humidity=98.26%, LDR=69.8%, Heater=ON
+2025-12-14 17:23:17,472 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 175] - Device 1: Temp=19.19°C, Humidity=82.87%, LDR=29.68%, Heater=ON
+2025-12-14 17:23:17,975 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 176] - Device 2: Temp=29.48°C, Humidity=93.23%, LDR=8.66%, Heater=ON
+2025-12-14 17:23:18,477 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 177] - Device 3: Temp=36.62°C, Humidity=62.36%, LDR=64.69%, Heater=OFF
+2025-12-14 17:23:23,984 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 178] - Device 1: Temp=33.59°C, Humidity=71.49%, LDR=56.9%, Heater=OFF
+2025-12-14 17:23:24,489 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 179] - Device 2: Temp=30.89°C, Humidity=72.28%, LDR=93.59%, Heater=OFF
+2025-12-14 17:23:24,994 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 180] - Device 3: Temp=24.75°C, Humidity=81.29%, LDR=86.17%, Heater=ON
+2025-12-14 17:23:30,501 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 181] - Device 1: Temp=28.05°C, Humidity=80.11%, LDR=68.97%, Heater=OFF
+2025-12-14 17:23:31,006 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 182] - Device 2: Temp=34.84°C, Humidity=70.7%, LDR=49.64%, Heater=OFF
+2025-12-14 17:23:31,509 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 183] - Device 3: Temp=23.24°C, Humidity=87.84%, LDR=20.55%, Heater=ON
+2025-12-14 17:23:37,015 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 184] - Device 1: Temp=35.65°C, Humidity=83.08%, LDR=40.61%, Heater=OFF
+2025-12-14 17:23:37,521 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 185] - Device 2: Temp=31.38°C, Humidity=65.96%, LDR=11.77%, Heater=OFF
+2025-12-14 17:23:38,026 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 186] - Device 3: Temp=27.27°C, Humidity=91.85%, LDR=0.18%, Heater=ON
+2025-12-14 17:23:43,530 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 187] - Device 1: Temp=32.3°C, Humidity=85.83%, LDR=82.72%, Heater=ON
+2025-12-14 17:23:44,033 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 188] - Device 2: Temp=23.04°C, Humidity=64.49%, LDR=24.57%, Heater=ON
+2025-12-14 17:23:44,537 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 189] - Device 3: Temp=33.23°C, Humidity=88.56%, LDR=44.96%, Heater=ON
+2025-12-14 17:23:50,047 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 190] - Device 1: Temp=31.42°C, Humidity=60.11%, LDR=30.88%, Heater=OFF
+2025-12-14 17:23:50,550 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 191] - Device 2: Temp=18.79°C, Humidity=93.61%, LDR=73.18%, Heater=ON
+2025-12-14 17:23:51,051 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 192] - Device 3: Temp=28.07°C, Humidity=67.54%, LDR=47.94%, Heater=OFF
+2025-12-14 17:23:56,556 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 193] - Device 1: Temp=23.61°C, Humidity=90.99%, LDR=14.75%, Heater=ON
+2025-12-14 17:23:57,060 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 194] - Device 2: Temp=31.39°C, Humidity=62.75%, LDR=7.97%, Heater=OFF
+2025-12-14 17:23:57,566 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 195] - Device 3: Temp=34.91°C, Humidity=87.71%, LDR=70.75%, Heater=ON
+2025-12-14 17:24:03,069 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 196] - Device 1: Temp=30.16°C, Humidity=89.84%, LDR=44.97%, Heater=ON
+2025-12-14 17:24:03,575 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 197] - Device 2: Temp=29.85°C, Humidity=98.09%, LDR=19.48%, Heater=ON
+2025-12-14 17:24:04,075 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 198] - Device 3: Temp=24.04°C, Humidity=80.45%, LDR=53.56%, Heater=ON

@@ -1,6 +1,6 @@
 /**
  * Smart Poultry Heater Control System - JavaScript
- * Handles real-time data updates, device control, and visualizations
+ * Handles real-time data updates from MySQL database via API
  */
 
 // ============================================
@@ -8,11 +8,11 @@
 // ============================================
 
 const CONFIG = {
+  apiBaseUrl: "api.php", // API endpoint
   updateInterval: 5000, // 5 seconds
-  mqttBroker: "192.168.1.100",
-  mqttPort: 1883,
-  deviceCount: 6,
   chartUpdateInterval: 10000, // 10 seconds
+  deviceCount: 3, // Updated to match actual device count
+  maxChartPoints: 20,
 };
 
 // ============================================
@@ -29,32 +29,60 @@ const state = {
   heaterStates: [],
   controlMode: "auto",
   isConnected: false,
+  stats: null,
 };
 
 // ============================================
-// Device Data Generator (Simulated)
+// API Functions
 // ============================================
 
-function generateDeviceData(deviceId) {
-  // Simulate realistic sensor readings based on the dataset
-  const temp = 18 + Math.random() * 20; // 18-38°C
-  const humidity = 70 + Math.random() * 30; // 70-100%
-  const ldr = Math.random() * 96; // 0-96%
+async function fetchAPI(action, params = {}) {
+  try {
+    const queryString = new URLSearchParams({ action, ...params }).toString();
+    const response = await fetch(`${CONFIG.apiBaseUrl}?${queryString}`);
 
-  // Simple ML prediction simulation (based on humidity correlation)
-  const heaterPrediction = humidity < 80 ? 1 : Math.random() > 0.5 ? 1 : 0;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  return {
-    id: deviceId,
-    name: `Device ${deviceId}`,
-    status: "online",
-    temperature: parseFloat(temp.toFixed(1)),
-    humidity: parseFloat(humidity.toFixed(1)),
-    ldr: parseFloat(ldr.toFixed(1)),
-    heater: heaterPrediction,
-    lastUpdate: new Date().toISOString(),
-    confidence: 85 + Math.random() * 10, // 85-95%
-  };
+    const data = await response.json();
+
+    if (data.status === "error") {
+      throw new Error(data.message);
+    }
+
+    return data.data;
+  } catch (error) {
+    console.error(`API Error (${action}):`, error);
+    throw error;
+  }
+}
+
+async function postAPI(action, data) {
+  try {
+    const response = await fetch(`${CONFIG.apiBaseUrl}?action=${action}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.status === "error") {
+      throw new Error(result.message);
+    }
+
+    return result.data;
+  } catch (error) {
+    console.error(`API Error (${action}):`, error);
+    throw error;
+  }
 }
 
 // ============================================
@@ -65,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 Initializing Smart Poultry Heater Control System...");
 
   initializeTheme();
-  initializeDevices();
   initializeCharts();
   setupEventListeners();
   startDataUpdates();
@@ -78,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================
 
 function initializeTheme() {
-  // Check for saved theme preference or default to 'dark'
   const savedTheme = localStorage.getItem("theme") || "dark";
   document.documentElement.setAttribute("data-theme", savedTheme);
   console.log(`🎨 Theme initialized: ${savedTheme}`);
@@ -98,13 +124,17 @@ function toggleTheme() {
 // Device Management
 // ============================================
 
-function initializeDevices() {
-  state.devices = [];
-  for (let i = 1; i <= CONFIG.deviceCount; i++) {
-    state.devices.push(generateDeviceData(i));
+async function loadDevices() {
+  try {
+    const data = await fetchAPI("devices");
+    state.devices = data.devices;
+    renderDevices();
+    updateDashboardMetrics();
+    updateSystemStatus(data.count);
+  } catch (error) {
+    console.error("Failed to load devices:", error);
+    showNotification("Failed to load devices", "error");
   }
-  renderDevices();
-  updateDashboardMetrics();
 }
 
 function renderDevices() {
@@ -112,6 +142,15 @@ function renderDevices() {
   if (!container) return;
 
   container.innerHTML = "";
+
+  if (state.devices.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--text-secondary);">
+        <p>No devices found. Make sure the MQTT bridge is running and devices are publishing data.</p>
+      </div>
+    `;
+    return;
+  }
 
   state.devices.forEach((device) => {
     const deviceCard = createDeviceCard(device);
@@ -124,61 +163,75 @@ function createDeviceCard(device) {
   card.className = "device-card";
   card.setAttribute("data-device-id", device.id);
 
+  const reading = device.latest_reading || {};
+  const hasData = reading.temperature !== null;
+
   card.innerHTML = `
-        <div class="device-header">
-            <h3 class="device-name">${device.name}</h3>
-            <span class="device-status ${device.status}">${device.status}</span>
+    <div class="device-header">
+      <h3 class="device-name">${device.name}</h3>
+      <span class="device-status ${device.status}">${device.status}</span>
+    </div>
+    
+    ${
+      hasData
+        ? `
+      <div class="device-readings">
+        <div class="device-reading">
+          <div class="reading-label">Temperature</div>
+          <div class="reading-value">
+            ${reading.temperature.toFixed(1)}
+            <span class="reading-unit">°C</span>
+          </div>
         </div>
-        
-        <div class="device-readings">
-            <div class="device-reading">
-                <div class="reading-label">Temperature</div>
-                <div class="reading-value">
-                    ${device.temperature}
-                    <span class="reading-unit">°C</span>
-                </div>
-            </div>
-            <div class="device-reading">
-                <div class="reading-label">Humidity</div>
-                <div class="reading-value">
-                    ${device.humidity}
-                    <span class="reading-unit">%</span>
-                </div>
-            </div>
-            <div class="device-reading">
-                <div class="reading-label">Light</div>
-                <div class="reading-value">
-                    ${device.ldr}
-                    <span class="reading-unit">%</span>
-                </div>
-            </div>
+        <div class="device-reading">
+          <div class="reading-label">Humidity</div>
+          <div class="reading-value">
+            ${reading.humidity.toFixed(1)}
+            <span class="reading-unit">%</span>
+          </div>
         </div>
-        
-        <div class="device-controls">
-            <button class="btn ${device.heater ? "btn-danger" : "btn-success"}" 
-                    onclick="toggleHeater(${device.id})">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                </svg>
-                Heater ${device.heater ? "ON" : "OFF"}
-            </button>
-            <button class="btn btn-secondary" onclick="viewDeviceDetails(${
-              device.id
-            })">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Details
-            </button>
+        <div class="device-reading">
+          <div class="reading-label">Light</div>
+          <div class="reading-value">
+            ${reading.ldr.toFixed(1)}
+            <span class="reading-unit">%</span>
+          </div>
         </div>
-    `;
+      </div>
+      
+      <div class="device-controls">
+        <button class="btn ${reading.heater ? "btn-danger" : "btn-success"}" 
+                onclick="toggleHeater(${device.id})">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+          </svg>
+          Heater ${reading.heater ? "ON" : "OFF"}
+        </button>
+        <button class="btn btn-secondary" onclick="viewDeviceDetails(${
+          device.id
+        })">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Details
+        </button>
+      </div>
+    `
+        : `
+      <div style="padding: 2rem; text-align: center; color: var(--text-secondary);">
+        <p>No data available yet</p>
+        <p style="font-size: 0.875rem; margin-top: 0.5rem;">Waiting for sensor readings...</p>
+      </div>
+    `
+    }
+  `;
 
   return card;
 }
 
-function toggleHeater(deviceId) {
+async function toggleHeater(deviceId) {
   const device = state.devices.find((d) => d.id === deviceId);
   if (!device) return;
 
@@ -189,28 +242,62 @@ function toggleHeater(deviceId) {
     return;
   }
 
-  device.heater = device.heater ? 0 : 1;
-  renderDevices();
-  updateDashboardMetrics();
+  try {
+    const newState = device.latest_reading.heater ? 0 : 1;
 
-  console.log(
-    `🔥 Device ${deviceId} heater toggled to ${device.heater ? "ON" : "OFF"}`
-  );
+    await postAPI("control", {
+      device_id: deviceId,
+      command: "heater",
+      value: newState,
+      source: "web_interface",
+    });
+
+    console.log(
+      `🔥 Device ${deviceId} heater command sent: ${newState ? "ON" : "OFF"}`
+    );
+    showNotification(
+      `Heater ${newState ? "ON" : "OFF"} command sent to Device ${deviceId}`,
+      "success"
+    );
+
+    // Refresh devices after a short delay
+    setTimeout(loadDevices, 1000);
+  } catch (error) {
+    console.error("Failed to toggle heater:", error);
+    showNotification("Failed to send heater command", "error");
+  }
 }
 
 function viewDeviceDetails(deviceId) {
   const device = state.devices.find((d) => d.id === deviceId);
   if (!device) return;
 
+  const reading = device.latest_reading || {};
+
   alert(
-    `📊 Device ${deviceId} Details\n\n` +
+    `📊 ${device.name} Details\n\n` +
       `Status: ${device.status}\n` +
-      `Temperature: ${device.temperature}°C\n` +
-      `Humidity: ${device.humidity}%\n` +
-      `Light: ${device.ldr}%\n` +
-      `Heater: ${device.heater ? "ON" : "OFF"}\n` +
-      `Confidence: ${device.confidence.toFixed(1)}%\n` +
-      `Last Update: ${new Date(device.lastUpdate).toLocaleString()}`
+      `Type: ${device.type}\n` +
+      `Last Seen: ${
+        device.last_seen ? new Date(device.last_seen).toLocaleString() : "Never"
+      }\n\n` +
+      `Latest Reading:\n` +
+      `Temperature: ${
+        reading.temperature ? reading.temperature.toFixed(1) + "°C" : "N/A"
+      }\n` +
+      `Humidity: ${
+        reading.humidity ? reading.humidity.toFixed(1) + "%" : "N/A"
+      }\n` +
+      `Light: ${reading.ldr ? reading.ldr.toFixed(1) + "%" : "N/A"}\n` +
+      `Heater: ${
+        reading.heater !== null ? (reading.heater ? "ON" : "OFF") : "N/A"
+      }\n` +
+      `Confidence: ${
+        reading.confidence ? (reading.confidence * 100).toFixed(1) + "%" : "N/A"
+      }\n` +
+      `Timestamp: ${
+        reading.timestamp ? new Date(reading.timestamp).toLocaleString() : "N/A"
+      }`
   );
 }
 
@@ -218,43 +305,80 @@ function viewDeviceDetails(deviceId) {
 // Dashboard Metrics
 // ============================================
 
-function updateDashboardMetrics() {
-  // Calculate averages
-  const avgTemp =
-    state.devices.reduce((sum, d) => sum + d.temperature, 0) /
-    state.devices.length;
-  const avgHumidity =
-    state.devices.reduce((sum, d) => sum + d.humidity, 0) /
-    state.devices.length;
-  const avgLight =
-    state.devices.reduce((sum, d) => sum + d.ldr, 0) / state.devices.length;
-  const heatersOn = state.devices.filter((d) => d.heater === 1).length;
+async function loadStats() {
+  try {
+    const stats = await fetchAPI("stats");
+    state.stats = stats;
+    updateDashboardMetrics();
+  } catch (error) {
+    console.error("Failed to load stats:", error);
+  }
+}
 
-  // Update dashboard
-  updateElement("avg-temp", avgTemp.toFixed(1));
-  updateElement("avg-humidity", avgHumidity.toFixed(1));
-  updateElement("avg-light", avgLight.toFixed(1));
+function updateDashboardMetrics() {
+  if (!state.stats) return;
+
+  // Update temperature
+  updateElement("avg-temp", state.stats.temperature.average || "--");
+  updateElement(
+    "temp-range",
+    `${state.stats.temperature.min || "--"}°C - ${
+      state.stats.temperature.max || "--"
+    }°C`
+  );
+
+  // Update humidity
+  updateElement("avg-humidity", state.stats.humidity.average || "--");
+  updateElement(
+    "humidity-range",
+    `${state.stats.humidity.min || "--"}% - ${
+      state.stats.humidity.max || "--"
+    }%`
+  );
+
+  // Update light
+  updateElement("avg-light", state.stats.light.average || "--");
+  updateElement(
+    "light-range",
+    `${state.stats.light.min || "--"}% - ${state.stats.light.max || "--"}%`
+  );
+
+  // Count heaters on from devices
+  const heatersOn = state.devices.filter(
+    (d) => d.latest_reading && d.latest_reading.heater === 1
+  ).length;
+
   updateElement("heaters-on", heatersOn);
+  updateElement("total-devices", state.devices.length);
   updateElement(
     "heater-percentage",
-    `${((heatersOn / CONFIG.deviceCount) * 100).toFixed(0)}%`
+    state.devices.length > 0
+      ? `${((heatersOn / state.devices.length) * 100).toFixed(0)}%`
+      : "0%"
   );
 
   // Update heater indicators
   const indicators = document.querySelectorAll(".heater-indicator");
   indicators.forEach((indicator, index) => {
     const device = state.devices[index];
-    if (device) {
-      indicator.className = `heater-indicator ${device.heater ? "on" : "off"}`;
+    if (device && device.latest_reading) {
+      indicator.className = `heater-indicator ${
+        device.latest_reading.heater ? "on" : "off"
+      }`;
     }
   });
 
   // Update confidence gauge
-  const avgConfidence =
-    state.devices.reduce((sum, d) => sum + d.confidence, 0) /
-    state.devices.length;
+  const avgConfidence = state.stats.avg_confidence || 0;
   updateElement("confidence-value", Math.round(avgConfidence));
   updateConfidenceGauge(avgConfidence);
+
+  // Update model accuracy
+  updateElement("model-accuracy", `${avgConfidence.toFixed(1)}%`);
+}
+
+function updateSystemStatus(deviceCount) {
+  updateElement("total-devices", deviceCount || CONFIG.deviceCount);
 }
 
 function updateElement(id, value) {
@@ -475,32 +599,28 @@ function getChartOptions(unit) {
 }
 
 function updateCharts() {
+  if (!state.stats) return;
+
   const now = new Date().toLocaleTimeString();
 
-  // Calculate current averages
-  const avgTemp =
-    state.devices.reduce((sum, d) => sum + d.temperature, 0) /
-    state.devices.length;
-  const avgHumidity =
-    state.devices.reduce((sum, d) => sum + d.humidity, 0) /
-    state.devices.length;
-  const avgLight =
-    state.devices.reduce((sum, d) => sum + d.ldr, 0) / state.devices.length;
-
   // Update individual metric charts
-  updateChart(tempChart, now, avgTemp);
-  updateChart(humidityChart, now, avgHumidity);
-  updateChart(lightChart, now, avgLight);
+  updateChart(tempChart, now, state.stats.temperature.average || 0);
+  updateChart(humidityChart, now, state.stats.humidity.average || 0);
+  updateChart(lightChart, now, state.stats.light.average || 0);
 
   // Update historical chart
   if (historicalChart) {
     historicalChart.data.labels.push(now);
-    historicalChart.data.datasets[0].data.push(avgTemp);
-    historicalChart.data.datasets[1].data.push(avgHumidity);
-    historicalChart.data.datasets[2].data.push(avgLight);
+    historicalChart.data.datasets[0].data.push(
+      state.stats.temperature.average || 0
+    );
+    historicalChart.data.datasets[1].data.push(
+      state.stats.humidity.average || 0
+    );
+    historicalChart.data.datasets[2].data.push(state.stats.light.average || 0);
 
     // Keep only last 20 data points
-    if (historicalChart.data.labels.length > 20) {
+    if (historicalChart.data.labels.length > CONFIG.maxChartPoints) {
       historicalChart.data.labels.shift();
       historicalChart.data.datasets.forEach((dataset) => dataset.data.shift());
     }
@@ -540,7 +660,8 @@ function setupEventListeners() {
   if (refreshBtn) {
     refreshBtn.addEventListener("click", () => {
       console.log("🔄 Refreshing devices...");
-      updateDevices();
+      loadDevices();
+      showNotification("Refreshing devices...", "info");
     });
   }
 
@@ -554,11 +675,10 @@ function setupEventListeners() {
       console.log(
         `🎛️ Control mode changed to: ${state.controlMode.toUpperCase()}`
       );
-
-      if (state.controlMode === "auto") {
-        // Re-apply ML predictions
-        updateDevices();
-      }
+      showNotification(
+        `Control mode: ${state.controlMode.toUpperCase()}`,
+        "info"
+      );
     });
   });
 
@@ -596,66 +716,26 @@ function setupEventListeners() {
 // ============================================
 
 function startDataUpdates() {
-  // Initial update
-  updateDevices();
-  updateCharts();
+  // Initial load
+  loadDevices();
+  loadStats();
 
   // Regular updates
-  setInterval(updateDevices, CONFIG.updateInterval);
+  setInterval(() => {
+    loadDevices();
+    loadStats();
+  }, CONFIG.updateInterval);
+
   setInterval(updateCharts, CONFIG.chartUpdateInterval);
-}
-
-function updateDevices() {
-  // Simulate receiving new data from devices
-  state.devices = state.devices.map((device) => {
-    const newData = generateDeviceData(device.id);
-
-    // In auto mode, use ML prediction
-    if (state.controlMode === "auto") {
-      return newData;
-    } else {
-      // In manual mode, keep current heater state
-      return { ...newData, heater: device.heater };
-    }
-  });
-
-  renderDevices();
-  updateDashboardMetrics();
 }
 
 // ============================================
 // Utility Functions
 // ============================================
 
-function formatTimestamp(timestamp) {
-  const date = new Date(timestamp);
-  return date.toLocaleString();
-}
-
 function showNotification(message, type = "info") {
   console.log(`[${type.toUpperCase()}] ${message}`);
   // In a real implementation, this would show a toast notification
-}
-
-// ============================================
-// MQTT Integration (Placeholder)
-// ============================================
-
-function connectMQTT() {
-  // This would connect to the actual MQTT broker
-  // For now, we're using simulated data
-  console.log("📡 MQTT connection would be established here");
-  state.isConnected = true;
-}
-
-function publishMQTT(topic, message) {
-  console.log(`📤 Publishing to ${topic}:`, message);
-  // Actual MQTT publish would happen here
-}
-
-function subscribeMQTT(topic) {
-  console.log(`📥 Subscribing to ${topic}`);
-  // Actual MQTT subscribe would happen here
 }
 
 // ============================================
@@ -665,8 +745,8 @@ function subscribeMQTT(topic) {
 window.PoultryControl = {
   state,
   toggleHeater,
-  updateDevices,
-  connectMQTT,
+  loadDevices,
+  loadStats,
   CONFIG,
 };
 
