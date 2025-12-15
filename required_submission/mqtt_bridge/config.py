@@ -39,15 +39,15 @@ MQTT_CONFIG = {
         ('poultry/status', 1)
     ],
     
-    # # Optional: MQTT authentication
-    # 'username': None,  # Set if your broker requires auth
-    # 'password': None,  # Set if your broker requires auth
+    # Optional: MQTT authentication
+    'username': None,  # Set if your broker requires auth
+    'password': None,  # Set if your broker requires auth
     
-    # # Optional: TLS/SSL
-    # 'use_tls': False,
-    # 'ca_certs': None,
-    # 'certfile': None,
-    # 'keyfile': None
+    # Optional: TLS/SSL
+    'use_tls': False,
+    'ca_certs': None,
+    'certfile': None,
+    'keyfile': None
 }
 
 # ============================================
