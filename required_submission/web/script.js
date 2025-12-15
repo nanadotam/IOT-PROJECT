@@ -27,9 +27,11 @@ const state = {
     light: [],
   },
   heaterStates: [],
-  controlMode: "auto",
+  controlMode: localStorage.getItem("controlMode") || "auto",
   isConnected: false,
   stats: null,
+  autoRefreshInterval: null,
+  chartUpdateInterval: null,
 };
 
 // ============================================
@@ -93,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 Initializing Smart Poultry Heater Control System...");
 
   initializeTheme();
+  initializeControlMode();
   initializeCharts();
   setupEventListeners();
   startDataUpdates();
@@ -118,6 +121,19 @@ function toggleTheme() {
   localStorage.setItem("theme", newTheme);
 
   console.log(`🎨 Theme switched to: ${newTheme}`);
+}
+
+function initializeControlMode() {
+  const savedMode = state.controlMode;
+  const radioButton = document.querySelector(
+    `input[name="control-mode"][value="${savedMode}"]`
+  );
+
+  if (radioButton) {
+    radioButton.checked = true;
+  }
+
+  console.log(`🎛️ Control mode initialized: ${savedMode.toUpperCase()}`);
 }
 
 // ============================================
@@ -672,13 +688,24 @@ function setupEventListeners() {
   controlModeInputs.forEach((input) => {
     input.addEventListener("change", (e) => {
       state.controlMode = e.target.value;
+      localStorage.setItem("controlMode", state.controlMode);
+
       console.log(
         `🎛️ Control mode changed to: ${state.controlMode.toUpperCase()}`
       );
-      showNotification(
-        `Control mode: ${state.controlMode.toUpperCase()}`,
-        "info"
-      );
+
+      if (state.controlMode === "manual") {
+        // Pause auto-refresh in manual mode
+        pauseAutoRefresh();
+        showNotification(
+          `Manual mode enabled - Auto-refresh paused. You can now control heaters manually.`,
+          "info"
+        );
+      } else {
+        // Resume auto-refresh in auto mode
+        resumeAutoRefresh();
+        showNotification(`Auto mode enabled - AI controlling heaters`, "info");
+      }
     });
   });
 
@@ -720,13 +747,52 @@ function startDataUpdates() {
   loadDevices();
   loadStats();
 
-  // Regular updates
-  setInterval(() => {
+  // Regular updates - only start if in auto mode
+  if (state.controlMode === "auto") {
+    state.autoRefreshInterval = setInterval(() => {
+      loadDevices();
+      loadStats();
+    }, CONFIG.updateInterval);
+
+    state.chartUpdateInterval = setInterval(
+      updateCharts,
+      CONFIG.chartUpdateInterval
+    );
+  }
+}
+
+function pauseAutoRefresh() {
+  if (state.autoRefreshInterval) {
+    clearInterval(state.autoRefreshInterval);
+    state.autoRefreshInterval = null;
+    console.log("⏸️ Auto-refresh paused");
+  }
+  if (state.chartUpdateInterval) {
+    clearInterval(state.chartUpdateInterval);
+    state.chartUpdateInterval = null;
+  }
+}
+
+function resumeAutoRefresh() {
+  // Clear any existing intervals first
+  pauseAutoRefresh();
+
+  // Start new intervals
+  state.autoRefreshInterval = setInterval(() => {
     loadDevices();
     loadStats();
   }, CONFIG.updateInterval);
 
-  setInterval(updateCharts, CONFIG.chartUpdateInterval);
+  state.chartUpdateInterval = setInterval(
+    updateCharts,
+    CONFIG.chartUpdateInterval
+  );
+
+  console.log("▶️ Auto-refresh resumed");
+
+  // Immediate refresh
+  loadDevices();
+  loadStats();
 }
 
 // ============================================

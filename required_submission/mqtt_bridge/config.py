@@ -67,7 +67,7 @@ VALIDATION_RULES = {
     },
     'ldr': {
         'min': 0.0,
-        'max': 100.0,
+        'max': 100.0,  # Scaled to percentage (0-100)
         'type': float
     },
     'heater_state': {

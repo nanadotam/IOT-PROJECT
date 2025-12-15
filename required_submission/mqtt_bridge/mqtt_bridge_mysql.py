@@ -238,6 +238,39 @@ def close_database_pool():
         logger.info("🔒 Closing MySQL connection pool")
 
 # ============================================
+# Data Transformation Functions
+# ============================================
+
+def transform_sensor_data(data):
+    """
+    Transform raw sensor data to expected format
+    - Scales LDR from raw ADC (0-4095) to percentage (0-99)
+    
+    Args:
+        data: Dictionary containing raw sensor data
+    
+    Returns:
+        Dictionary with transformed data
+    """
+    transformed = data.copy()
+    
+    # Scale LDR from raw ADC (0-4095) to percentage (0-99)
+    if 'ldr' in transformed:
+        try:
+            raw_ldr = float(transformed['ldr'])
+            # Scale: (raw / 4095) * 99
+            scaled_ldr = (raw_ldr / 4095.0) * 99.0
+            # Clamp to valid range
+            scaled_ldr = max(0.0, min(99.0, scaled_ldr))
+            transformed['ldr'] = round(scaled_ldr, 2)
+            
+            logger.debug(f"🔄 LDR transformed: {raw_ldr} → {transformed['ldr']}%")
+        except (ValueError, TypeError) as e:
+            logger.warning(f"⚠️  Failed to transform LDR value: {e}")
+    
+    return transformed
+
+# ============================================
 # Data Validation Functions
 # ============================================
 
@@ -302,8 +335,11 @@ def validate_sensor_data(data):
 
 def handle_sensor_data(data, topic):
     """Handle sensor data messages"""
-    # Validate data
-    is_valid, error_msg = validate_sensor_data(data)
+    # Transform raw data (scale LDR, etc.)
+    transformed_data = transform_sensor_data(data)
+    
+    # Validate transformed data
+    is_valid, error_msg = validate_sensor_data(transformed_data)
     
     if not is_valid:
         logger.error(f"❌ Validation failed for {topic}: {error_msg}")
@@ -311,7 +347,7 @@ def handle_sensor_data(data, topic):
         return
     
     # Store in database
-    success = store_sensor_reading(data)
+    success = store_sensor_reading(transformed_data)
     
     if not success:
         logger.error(f"❌ Failed to store sensor data from {topic}")
