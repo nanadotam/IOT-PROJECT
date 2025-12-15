@@ -12,15 +12,20 @@
 #include <ArduinoJson.h>
 #include <WebServer.h>
 
+// MASTER
 // ------------------ NRF24 SETUP ------------------
 RF24 radio(21, 5); // CE, CSN
 
 // RF-safe hexadecimal addresses (5 bytes)
-const uint64_t nodeAddresses[] = {
-  0xE8E8F0F0A1, // Node 1
-  0xE8E8F0F0B2, // Node 2
-  0xE8E8F0F0C3  // Node 3
+const uint64_t pipeAddresses[] = {
+  0xA1A1A1A101LL,  // Pipe 1 → Node 1
+  0xA1A1A1A102LL,  // Pipe 2 → Node 2
+  0xA1A1A1A103LL,  // Pipe 3 → Node 3
+  0xA1A1A1A104LL,  // Pipe 4 → Node 4
+  0xA1A1A1A105LL,  // Pipe 5 → Node 5
+  0xA1A1A1A106LL   // Pipe 6 → Node 6
 };
+
 
 // ------------------ DATA STRUCTS ------------------
 struct SensorPacket {

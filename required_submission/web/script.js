@@ -182,6 +182,22 @@ function createDeviceCard(device) {
   const reading = device.latest_reading || {};
   const hasData = reading.temperature !== null;
 
+  // Format timestamp
+  let timeAgo = "No data";
+  if (reading.timestamp) {
+    const timestamp = new Date(reading.timestamp);
+    const now = new Date();
+    const secondsAgo = Math.floor((now - timestamp) / 1000);
+
+    if (secondsAgo < 60) {
+      timeAgo = `${secondsAgo}s ago`;
+    } else if (secondsAgo < 3600) {
+      timeAgo = `${Math.floor(secondsAgo / 60)}m ago`;
+    } else {
+      timeAgo = timestamp.toLocaleTimeString();
+    }
+  }
+
   card.innerHTML = `
     <div class="device-header">
       <h3 class="device-name">${device.name}</h3>
@@ -215,24 +231,10 @@ function createDeviceCard(device) {
         </div>
       </div>
       
-      <div class="device-controls">
-        <button class="btn ${reading.heater ? "btn-danger" : "btn-success"}" 
-                onclick="toggleHeater(${device.id})">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-          </svg>
-          Heater ${reading.heater ? "ON" : "OFF"}
-        </button>
-        <button class="btn btn-secondary" onclick="viewDeviceDetails(${
-          device.id
-        })">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          Details
-        </button>
+      <div class="device-footer">
+        <div class="device-timestamp">
+          <span>Last updated: ${timeAgo}</span>
+        </div>
       </div>
     `
         : `
@@ -245,76 +247,6 @@ function createDeviceCard(device) {
   `;
 
   return card;
-}
-
-async function toggleHeater(deviceId) {
-  const device = state.devices.find((d) => d.id === deviceId);
-  if (!device) return;
-
-  if (state.controlMode === "auto") {
-    alert(
-      "⚠️ System is in AUTO mode. Switch to MANUAL mode to control heaters manually."
-    );
-    return;
-  }
-
-  try {
-    const newState = device.latest_reading.heater ? 0 : 1;
-
-    await postAPI("control", {
-      device_id: deviceId,
-      command: "heater",
-      value: newState,
-      source: "web_interface",
-    });
-
-    console.log(
-      `🔥 Device ${deviceId} heater command sent: ${newState ? "ON" : "OFF"}`
-    );
-    showNotification(
-      `Heater ${newState ? "ON" : "OFF"} command sent to Device ${deviceId}`,
-      "success"
-    );
-
-    // Refresh devices after a short delay
-    setTimeout(loadDevices, 1000);
-  } catch (error) {
-    console.error("Failed to toggle heater:", error);
-    showNotification("Failed to send heater command", "error");
-  }
-}
-
-function viewDeviceDetails(deviceId) {
-  const device = state.devices.find((d) => d.id === deviceId);
-  if (!device) return;
-
-  const reading = device.latest_reading || {};
-
-  alert(
-    `📊 ${device.name} Details\n\n` +
-      `Status: ${device.status}\n` +
-      `Type: ${device.type}\n` +
-      `Last Seen: ${
-        device.last_seen ? new Date(device.last_seen).toLocaleString() : "Never"
-      }\n\n` +
-      `Latest Reading:\n` +
-      `Temperature: ${
-        reading.temperature ? reading.temperature.toFixed(1) + "°C" : "N/A"
-      }\n` +
-      `Humidity: ${
-        reading.humidity ? reading.humidity.toFixed(1) + "%" : "N/A"
-      }\n` +
-      `Light: ${reading.ldr ? reading.ldr.toFixed(1) + "%" : "N/A"}\n` +
-      `Heater: ${
-        reading.heater !== null ? (reading.heater ? "ON" : "OFF") : "N/A"
-      }\n` +
-      `Confidence: ${
-        reading.confidence ? (reading.confidence * 100).toFixed(1) + "%" : "N/A"
-      }\n` +
-      `Timestamp: ${
-        reading.timestamp ? new Date(reading.timestamp).toLocaleString() : "N/A"
-      }`
-  );
 }
 
 // ============================================
@@ -359,38 +291,11 @@ function updateDashboardMetrics() {
     `${state.stats.light.min || "--"}% - ${state.stats.light.max || "--"}%`
   );
 
-  // Count heaters on from devices
-  const heatersOn = state.devices.filter(
-    (d) => d.latest_reading && d.latest_reading.heater === 1
-  ).length;
-
-  updateElement("heaters-on", heatersOn);
-  updateElement("total-devices", state.devices.length);
-  updateElement(
-    "heater-percentage",
-    state.devices.length > 0
-      ? `${((heatersOn / state.devices.length) * 100).toFixed(0)}%`
-      : "0%"
-  );
-
-  // Update heater indicators
-  const indicators = document.querySelectorAll(".heater-indicator");
-  indicators.forEach((indicator, index) => {
-    const device = state.devices[index];
-    if (device && device.latest_reading) {
-      indicator.className = `heater-indicator ${
-        device.latest_reading.heater ? "on" : "off"
-      }`;
-    }
-  });
-
-  // Update confidence gauge
-  const avgConfidence = state.stats.avg_confidence || 0;
-  updateElement("confidence-value", Math.round(avgConfidence));
-  updateConfidenceGauge(avgConfidence);
-
-  // Update model accuracy
-  updateElement("model-accuracy", `${avgConfidence.toFixed(1)}%`);
+  // Update average temperature stat card in hero section
+  const avgTempStat = document.getElementById("avg-temp-stat");
+  if (avgTempStat && state.stats.temperature.average) {
+    avgTempStat.textContent = `${state.stats.temperature.average}°C`;
+  }
 }
 
 function updateSystemStatus(deviceCount) {
@@ -402,15 +307,6 @@ function updateElement(id, value) {
   if (element) {
     element.textContent = value;
   }
-}
-
-function updateConfidenceGauge(confidence) {
-  const arc = document.getElementById("confidence-arc");
-  if (!arc) return;
-
-  // Calculate stroke-dashoffset (251.2 is the full arc length)
-  const offset = 251.2 - 251.2 * (confidence / 100);
-  arc.style.strokeDashoffset = offset;
 }
 
 // ============================================
@@ -681,34 +577,6 @@ function setupEventListeners() {
     });
   }
 
-  // Control mode radio buttons
-  const controlModeInputs = document.querySelectorAll(
-    'input[name="control-mode"]'
-  );
-  controlModeInputs.forEach((input) => {
-    input.addEventListener("change", (e) => {
-      state.controlMode = e.target.value;
-      localStorage.setItem("controlMode", state.controlMode);
-
-      console.log(
-        `🎛️ Control mode changed to: ${state.controlMode.toUpperCase()}`
-      );
-
-      if (state.controlMode === "manual") {
-        // Pause auto-refresh in manual mode
-        pauseAutoRefresh();
-        showNotification(
-          `Manual mode enabled - Auto-refresh paused. You can now control heaters manually.`,
-          "info"
-        );
-      } else {
-        // Resume auto-refresh in auto mode
-        resumeAutoRefresh();
-        showNotification(`Auto mode enabled - AI controlling heaters`, "info");
-      }
-    });
-  });
-
   // Navigation links
   const navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach((link) => {
@@ -727,15 +595,6 @@ function setupEventListeners() {
       }
     });
   });
-
-  // Heater indicators click
-  const heaterIndicators = document.querySelectorAll(".heater-indicator");
-  heaterIndicators.forEach((indicator) => {
-    indicator.addEventListener("click", () => {
-      const deviceId = parseInt(indicator.getAttribute("data-device"));
-      toggleHeater(deviceId);
-    });
-  });
 }
 
 // ============================================
@@ -747,18 +606,16 @@ function startDataUpdates() {
   loadDevices();
   loadStats();
 
-  // Regular updates - only start if in auto mode
-  if (state.controlMode === "auto") {
-    state.autoRefreshInterval = setInterval(() => {
-      loadDevices();
-      loadStats();
-    }, CONFIG.updateInterval);
+  // Regular updates
+  state.autoRefreshInterval = setInterval(() => {
+    loadDevices();
+    loadStats();
+  }, CONFIG.updateInterval);
 
-    state.chartUpdateInterval = setInterval(
-      updateCharts,
-      CONFIG.chartUpdateInterval
-    );
-  }
+  state.chartUpdateInterval = setInterval(
+    updateCharts,
+    CONFIG.chartUpdateInterval
+  );
 }
 
 function pauseAutoRefresh() {
@@ -810,7 +667,6 @@ function showNotification(message, type = "info") {
 
 window.PoultryControl = {
   state,
-  toggleHeater,
   loadDevices,
   loadStats,
   CONFIG,

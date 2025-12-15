@@ -122,9 +122,8 @@ function handleDevices($method)
             lr.temperature,
             lr.humidity,
             lr.ldr,
-            lr.heater_state,
-            lr.prediction_confidence,
-            lr.timestamp as last_reading_time
+            lr.timestamp as last_reading_time,
+            TIMESTAMPDIFF(SECOND, lr.timestamp, NOW()) as seconds_since_reading
         FROM devices d
         LEFT JOIN latest_readings lr ON d.device_id = lr.device_id
         ORDER BY d.device_id ASC
@@ -140,18 +139,24 @@ function handleDevices($method)
 
     $devices = [];
     while ($row = $result->fetch_assoc()) {
+        // Determine if device is online (data received within last 10 seconds)
+        $isOnline = false;
+        if ($row['last_reading_time'] !== null) {
+            $secondsSince = (int) $row['seconds_since_reading'];
+            $isOnline = $secondsSince <= 10;
+        }
+
         $devices[] = [
             'id' => (int) $row['device_id'],
             'name' => $row['device_name'],
             'type' => $row['device_type'],
-            'status' => $row['status'],
-            'last_seen' => $row['last_seen'],
+            'status' => $isOnline ? 'online' : 'offline',
+            'last_seen' => $row['last_reading_time'],
+            'seconds_since_reading' => $row['seconds_since_reading'] ? (int) $row['seconds_since_reading'] : null,
             'latest_reading' => [
                 'temperature' => $row['temperature'] ? (float) $row['temperature'] : null,
                 'humidity' => $row['humidity'] ? (float) $row['humidity'] : null,
                 'ldr' => $row['ldr'] ? (float) $row['ldr'] : null,
-                'heater' => $row['heater_state'] !== null ? (int) $row['heater_state'] : null,
-                'confidence' => $row['prediction_confidence'] ? (float) $row['prediction_confidence'] : null,
                 'timestamp' => $row['last_reading_time']
             ]
         ];

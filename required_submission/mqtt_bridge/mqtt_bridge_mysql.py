@@ -410,28 +410,149 @@ def on_disconnect(client, userdata, rc):
     else:
         logger.info("🔌 Disconnected from MQTT broker")
 
+# Temporary storage for aggregating individual sensor readings
+node_data_buffer = {}
+
 def on_message(client, userdata, msg):
     """Callback when message received"""
+    global node_data_buffer
+    
     try:
         topic = msg.topic
         payload = msg.payload.decode('utf-8')
         
         logger.debug(f"📨 Message received on {topic}: {payload}")
         
-        # Parse JSON payload
-        try:
-            data = json.loads(payload)
-        except json.JSONDecodeError as e:
-            logger.error(f"❌ Invalid JSON payload on {topic}: {e}")
+        # Route message based on topic pattern
+        # New format: poultry/node1/data, poultry/node1/temperature, etc.
+        # Old format: poultry/device1/sensors
+        
+        if 'control' in topic:
+            try:
+                data = json.loads(payload)
+                handle_control_command(data, topic)
+            except json.JSONDecodeError as e:
+                logger.error(f"❌ Invalid JSON payload on {topic}: {e}")
             return
         
-        # Route message based on topic
-        if 'sensors' in topic:
-            handle_sensor_data(data, topic)
-        elif 'control' in topic:
-            handle_control_command(data, topic)
-        elif 'status' in topic:
-            handle_status_update(data, topic)
+        if 'status' in topic:
+            try:
+                data = json.loads(payload)
+                handle_status_update(data, topic)
+            except json.JSONDecodeError as e:
+                logger.error(f"❌ Invalid JSON payload on {topic}: {e}")
+            return
+        
+        # Handle sensor data topics
+        if 'node' in topic or 'device' in topic:
+            # Extract node/device ID from topic
+            # Format: poultry/node1/data or poultry/device1/sensors
+            parts = topic.split('/')
+            
+            if len(parts) >= 2:
+                node_part = parts[1]  # e.g., "node1" or "device1"
+                
+                # Extract numeric ID
+                device_id = None
+                if 'node' in node_part:
+                    device_id = int(node_part.replace('node', ''))
+                elif 'device' in node_part:
+                    device_id = int(node_part.replace('device', ''))
+                
+                if device_id is None:
+                    logger.warning(f"⚠️  Could not extract device ID from topic: {topic}")
+                    return
+                
+                # Check if this is a complete data packet (JSON)
+                if '/data' in topic or '/sensors' in topic:
+                    try:
+                        data = json.loads(payload)
+                        
+                        # Ensure device_id is set
+                        if 'node_id' in data:
+                            data['device_id'] = data['node_id']
+                        elif 'device_id' not in data:
+                            data['device_id'] = device_id
+                        
+                        # Ensure all required fields exist
+                        if 'temperature' in data and 'humidity' in data and 'light' in data:
+                            # Map 'light' to 'ldr' if needed
+                            if 'ldr' not in data and 'light' in data:
+                                data['ldr'] = data['light']
+                            
+                            # Set heater to 0 if not present (since ML handles it now)
+                            if 'heater' not in data:
+                                data['heater'] = data.get('device_state', 0)
+                            
+                            # Handle the complete sensor data
+                            handle_sensor_data(data, topic)
+                        else:
+                            logger.warning(f"⚠️  Incomplete data packet on {topic}: {data}")
+                    
+                    except json.JSONDecodeError as e:
+                        logger.error(f"❌ Invalid JSON payload on {topic}: {e}")
+                
+                # Handle individual sensor readings (temperature, humidity, light)
+                elif '/temperature' in topic or '/humidity' in topic or '/light' in topic:
+                    # Initialize buffer for this device if not exists
+                    if device_id not in node_data_buffer:
+                        node_data_buffer[device_id] = {
+                            'device_id': device_id,
+                            'temperature': None,
+                            'humidity': None,
+                            'ldr': None,
+                            'heater': 0,  # Default to OFF since ML controls it
+                            'last_update': time.time()
+                        }
+                    
+                    # Update the specific field
+                    try:
+                        value = float(payload)
+                        
+                        if '/temperature' in topic:
+                            node_data_buffer[device_id]['temperature'] = value
+                        elif '/humidity' in topic:
+                            node_data_buffer[device_id]['humidity'] = value
+                        elif '/light' in topic:
+                            node_data_buffer[device_id]['ldr'] = value
+                        
+                        node_data_buffer[device_id]['last_update'] = time.time()
+                        
+                        # Check if we have all required fields
+                        buffer = node_data_buffer[device_id]
+                        if (buffer['temperature'] is not None and 
+                            buffer['humidity'] is not None and 
+                            buffer['ldr'] is not None):
+                            
+                            # We have complete data, store it
+                            handle_sensor_data(buffer.copy(), topic)
+                            
+                            # Reset buffer for this device
+                            node_data_buffer[device_id] = {
+                                'device_id': device_id,
+                                'temperature': None,
+                                'humidity': None,
+                                'ldr': None,
+                                'heater': 0,
+                                'last_update': time.time()
+                            }
+                    
+                    except ValueError:
+                        logger.error(f"❌ Invalid numeric value on {topic}: {payload}")
+                
+                else:
+                    logger.warning(f"⚠️  Unknown sensor topic pattern: {topic}")
+            else:
+                logger.warning(f"⚠️  Invalid topic format: {topic}")
+        
+        # Handle old format for backward compatibility
+        elif 'sensors' in topic:
+            try:
+                data = json.loads(payload)
+                handle_sensor_data(data, topic)
+            except json.JSONDecodeError as e:
+                logger.error(f"❌ Invalid JSON payload on {topic}: {e}")
+        
         else:
             logger.warning(f"⚠️  Unknown topic: {topic}")
     

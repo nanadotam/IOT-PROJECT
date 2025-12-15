@@ -1,28 +1,28 @@
-/*
- *  - Transmitter Code (CLEANED)
- *  Library: TMRh20/RF24
- */
+//WORKING CODE
 
+
+/*
+* 
+*  - Transmitter Code
+* 
+* Library: TMRh20/RF24, https://github.com/tmrh20/RF24/
+*/
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <DHT.h>
 
 RF24 radio(21, 5); // CE, CSN
-
-// ====== CHANGE THIS PER NODE ======
-const uint64_t address = 0xE8E8F0F0A1;  // <-- Node address
-// ==================================
+const uint64_t address = 0xE8E8F0F0B2;
 
 #define LED 2
 #define DHTPIN 12
 #define DHTTYPE DHT22
-
 DHT dht(DHTPIN, DHTTYPE);
 
-int LDR_PIN = 27;
+int LDR_PIN = 27;  // LDR analog pin
 
-// ------------------ DATA STRUCT ------------------
+// Data structure to send
 struct SensorPacket {
   float temperature;
   float humidity;
@@ -31,7 +31,6 @@ struct SensorPacket {
 
 SensorPacket packet;
 
-// ------------------ SETUP ------------------
 void setup() {
   Serial.begin(9600);
   dht.begin();
@@ -41,33 +40,36 @@ void setup() {
   radio.setPALevel(RF24_PA_MIN);
   radio.stopListening();
 
-  Serial.println("=== TRANSMITTER READY ===");
 }
 
-// ------------------ LOOP ------------------
 void loop() {
-  packet.temperature = dht.readTemperature();
-  packet.humidity    = dht.readHumidity();
-  packet.lightLevel  = analogRead(LDR_PIN);
 
+  // ---- Read sensors ----
+  packet.temperature = dht.readTemperature();
+  packet.humidity = dht.readHumidity();
+  packet.lightLevel = analogRead(LDR_PIN);  // 0-1023
+
+  // Safety check for DHT read
   if (isnan(packet.temperature) || isnan(packet.humidity)) {
     Serial.println("DHT read error");
-    delay(1000);
     return;
   }
 
+  // ---- Print to Serial Monitor ----
   Serial.print("Temp: "); Serial.print(packet.temperature);
   Serial.print(" | Humidity: "); Serial.print(packet.humidity);
   Serial.print(" | LDR: "); Serial.println(packet.lightLevel);
 
-  // -------- SINGLE RF WRITE (FIX) --------
+  // ---- Send packet over RF ----
+   radio.write(&packet, sizeof(packet));
+   delay(450);
+ 
   bool ok = radio.write(&packet, sizeof(packet));
+if (!ok) {
+  Serial.println("NRF24 TX FAILED");
+} else {
+  Serial.println("NRF24 TX OK");
+}
 
-  if (ok) {
-    Serial.println("NRF24 TX OK");
-  } else {
-    Serial.println("NRF24 TX FAILED");
-  }
-
-  delay(900);
+  delay(450);
 }

@@ -32,9 +32,18 @@ MQTT_CONFIG = {
     
     # Topics to subscribe to
     'topics': [
-        ('poultry/device1/sensors', 1),
-        ('poultry/device2/sensors', 1),
-        ('poultry/device3/sensors', 1),
+        ('poultry/node1/data', 1),
+        ('poultry/node2/data', 1),
+        ('poultry/node3/data', 1),
+        ('poultry/node1/temperature', 1),
+        ('poultry/node2/temperature', 1),
+        ('poultry/node3/temperature', 1),
+        ('poultry/node1/humidity', 1),
+        ('poultry/node2/humidity', 1),
+        ('poultry/node3/humidity', 1),
+        ('poultry/node1/light', 1),
+        ('poultry/node2/light', 1),
+        ('poultry/node3/light', 1),
         ('poultry/control/#', 1),
         ('poultry/status', 1)
     ],
