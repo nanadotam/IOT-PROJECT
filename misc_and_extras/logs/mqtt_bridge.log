@@ -219,3 +219,207 @@
 2025-12-14 17:24:03,069 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 196] - Device 1: Temp=30.16°C, Humidity=89.84%, LDR=44.97%, Heater=ON
 2025-12-14 17:24:03,575 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 197] - Device 2: Temp=29.85°C, Humidity=98.09%, LDR=19.48%, Heater=ON
 2025-12-14 17:24:04,075 - MQTTBridge - INFO - 📊 Sensor data stored [ID: 198] - Device 3: Temp=24.04°C, Humidity=80.45%, LDR=53.56%, Heater=ON
+2025-12-14 20:37:35,032 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:37:35,090 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:37:35,109 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:37:35,109 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:37:35,109 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:37:35,111 - MQTTBridge - ERROR - ❌ Connection attempt 1 failed: [Errno 61] Connection refused
+2025-12-14 20:37:35,111 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:37:40,114 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:37:40,115 - MQTTBridge - ERROR - ❌ Connection attempt 2 failed: [Errno 61] Connection refused
+2025-12-14 20:37:40,115 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:37:45,120 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:37:45,121 - MQTTBridge - ERROR - ❌ Connection attempt 3 failed: [Errno 61] Connection refused
+2025-12-14 20:37:45,121 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:37:50,126 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:37:50,127 - MQTTBridge - ERROR - ❌ Connection attempt 4 failed: [Errno 61] Connection refused
+2025-12-14 20:37:50,127 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:37:55,132 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:37:55,133 - MQTTBridge - ERROR - ❌ Connection attempt 5 failed: [Errno 61] Connection refused
+2025-12-14 20:37:55,133 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:38:00,138 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:38:00,139 - MQTTBridge - ERROR - ❌ Connection attempt 6 failed: [Errno 61] Connection refused
+2025-12-14 20:38:00,139 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:38:05,144 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:38:05,144 - MQTTBridge - ERROR - ❌ Connection attempt 7 failed: [Errno 61] Connection refused
+2025-12-14 20:38:05,144 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:38:10,149 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:38:10,150 - MQTTBridge - ERROR - ❌ Connection attempt 8 failed: [Errno 61] Connection refused
+2025-12-14 20:38:10,151 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:38:15,154 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:38:15,155 - MQTTBridge - ERROR - ❌ Connection attempt 9 failed: [Errno 61] Connection refused
+2025-12-14 20:38:15,155 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:38:20,160 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:38:20,161 - MQTTBridge - ERROR - ❌ Connection attempt 10 failed: [Errno 61] Connection refused
+2025-12-14 20:38:20,161 - MQTTBridge - CRITICAL - ❌ Max reconnection attempts reached. Exiting.
+2025-12-14 20:38:20,161 - MQTTBridge - CRITICAL - ❌ Failed to connect to MQTT broker
+2025-12-14 20:38:20,161 - MQTTBridge - INFO - 🔒 Closing MySQL connection pool
+2025-12-14 20:47:02,658 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:47:02,702 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:47:02,716 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:47:02,716 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:47:02,716 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:02,717 - MQTTBridge - ERROR - ❌ Connection attempt 1 failed: [Errno 61] Connection refused
+2025-12-14 20:47:02,717 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:07,719 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:07,720 - MQTTBridge - ERROR - ❌ Connection attempt 2 failed: [Errno 61] Connection refused
+2025-12-14 20:47:07,720 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:12,721 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:12,722 - MQTTBridge - ERROR - ❌ Connection attempt 3 failed: [Errno 61] Connection refused
+2025-12-14 20:47:12,722 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:17,727 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:17,728 - MQTTBridge - ERROR - ❌ Connection attempt 4 failed: [Errno 61] Connection refused
+2025-12-14 20:47:17,728 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:22,732 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:22,733 - MQTTBridge - ERROR - ❌ Connection attempt 5 failed: [Errno 61] Connection refused
+2025-12-14 20:47:22,733 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:27,736 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:27,737 - MQTTBridge - ERROR - ❌ Connection attempt 6 failed: [Errno 61] Connection refused
+2025-12-14 20:47:27,737 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:32,740 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:32,741 - MQTTBridge - ERROR - ❌ Connection attempt 7 failed: [Errno 61] Connection refused
+2025-12-14 20:47:32,742 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:37,746 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:37,748 - MQTTBridge - ERROR - ❌ Connection attempt 8 failed: [Errno 61] Connection refused
+2025-12-14 20:47:37,748 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:42,752 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:42,754 - MQTTBridge - ERROR - ❌ Connection attempt 9 failed: [Errno 61] Connection refused
+2025-12-14 20:47:42,754 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:44,506 - MQTTBridge - INFO - 
+⏹️  Received interrupt signal. Shutting down...
+2025-12-14 20:47:44,506 - MQTTBridge - INFO - 🛑 Stopping MQTT bridge...
+2025-12-14 20:47:44,506 - MQTTBridge - INFO - 🔒 Closing MySQL connection pool
+2025-12-14 20:47:44,506 - MQTTBridge - INFO - ✅ MQTT bridge stopped
+2025-12-14 20:47:47,187 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:47:47,198 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:47:47,203 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:47:47,203 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:47:47,203 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:47,204 - MQTTBridge - ERROR - ❌ Connection attempt 1 failed: [Errno 61] Connection refused
+2025-12-14 20:47:47,205 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:52,210 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:52,212 - MQTTBridge - ERROR - ❌ Connection attempt 2 failed: [Errno 61] Connection refused
+2025-12-14 20:47:52,212 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:47:57,216 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:47:57,217 - MQTTBridge - ERROR - ❌ Connection attempt 3 failed: [Errno 61] Connection refused
+2025-12-14 20:47:57,217 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:02,219 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:02,220 - MQTTBridge - ERROR - ❌ Connection attempt 4 failed: [Errno 61] Connection refused
+2025-12-14 20:48:02,220 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:07,225 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:07,226 - MQTTBridge - ERROR - ❌ Connection attempt 5 failed: [Errno 61] Connection refused
+2025-12-14 20:48:07,226 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:12,228 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:12,230 - MQTTBridge - ERROR - ❌ Connection attempt 6 failed: [Errno 61] Connection refused
+2025-12-14 20:48:12,230 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:17,232 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:17,233 - MQTTBridge - ERROR - ❌ Connection attempt 7 failed: [Errno 61] Connection refused
+2025-12-14 20:48:17,233 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:22,238 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:22,239 - MQTTBridge - ERROR - ❌ Connection attempt 8 failed: [Errno 61] Connection refused
+2025-12-14 20:48:22,239 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:27,244 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:27,246 - MQTTBridge - ERROR - ❌ Connection attempt 9 failed: [Errno 61] Connection refused
+2025-12-14 20:48:27,246 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:48:32,248 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:48:32,250 - MQTTBridge - ERROR - ❌ Connection attempt 10 failed: [Errno 61] Connection refused
+2025-12-14 20:48:32,250 - MQTTBridge - CRITICAL - ❌ Max reconnection attempts reached. Exiting.
+2025-12-14 20:48:32,250 - MQTTBridge - CRITICAL - ❌ Failed to connect to MQTT broker
+2025-12-14 20:48:32,250 - MQTTBridge - INFO - 🔒 Closing MySQL connection pool
+2025-12-14 20:50:36,784 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:50:36,793 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:50:36,795 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:50:36,795 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:50:36,795 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:50:36,795 - MQTTBridge - ERROR - ❌ Connection attempt 1 failed: [Errno 61] Connection refused
+2025-12-14 20:50:36,796 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:50:41,801 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:50:41,803 - MQTTBridge - ERROR - ❌ Connection attempt 2 failed: [Errno 61] Connection refused
+2025-12-14 20:50:41,803 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:50:46,807 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:50:46,808 - MQTTBridge - ERROR - ❌ Connection attempt 3 failed: [Errno 61] Connection refused
+2025-12-14 20:50:46,809 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:50:51,812 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:50:51,813 - MQTTBridge - ERROR - ❌ Connection attempt 4 failed: [Errno 61] Connection refused
+2025-12-14 20:50:51,813 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:50:56,817 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:50:56,819 - MQTTBridge - ERROR - ❌ Connection attempt 5 failed: [Errno 61] Connection refused
+2025-12-14 20:50:56,819 - MQTTBridge - INFO - ⏳ Retrying in 5 seconds...
+2025-12-14 20:51:00,756 - MQTTBridge - INFO - 
+⏹️  Received interrupt signal. Shutting down...
+2025-12-14 20:51:00,756 - MQTTBridge - INFO - 🛑 Stopping MQTT bridge...
+2025-12-14 20:51:00,756 - MQTTBridge - INFO - 🔒 Closing MySQL connection pool
+2025-12-14 20:51:00,756 - MQTTBridge - INFO - ✅ MQTT bridge stopped
+2025-12-14 20:51:10,876 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:51:10,885 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:51:10,887 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:51:10,888 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:51:10,888 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - ✅ MQTT Bridge initialized successfully
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📊 Database: poultry_control@localhost
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📡 MQTT Broker: localhost:1883
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 🎯 Subscribed to 5 topics
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - Press Ctrl+C to stop...
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - ================================================================================
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 🚀 Starting MQTT bridge...
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - ✅ Connected to MQTT broker
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device1/sensors (QoS 1)
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device2/sensors (QoS 1)
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device3/sensors (QoS 1)
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📡 Subscribed to: poultry/control/# (QoS 1)
+2025-12-14 20:51:10,889 - MQTTBridge - INFO - 📡 Subscribed to: poultry/status (QoS 1)
+2025-12-14 20:51:19,020 - MQTTBridge - INFO - 
+⏹️  Received interrupt signal. Shutting down...
+2025-12-14 20:51:19,020 - MQTTBridge - INFO - 🛑 Stopping MQTT bridge...
+2025-12-14 20:51:19,020 - MQTTBridge - INFO - 🔌 Disconnected from MQTT broker
+2025-12-14 20:51:19,021 - MQTTBridge - INFO - 🔒 Closing MySQL connection pool
+2025-12-14 20:51:19,021 - MQTTBridge - INFO - ✅ MQTT bridge stopped
+2025-12-14 20:51:25,964 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:51:25,973 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:51:25,975 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:51:25,975 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:51:25,975 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:51:25,976 - MQTTBridge - INFO - ✅ MQTT Bridge initialized successfully
+2025-12-14 20:51:25,976 - MQTTBridge - INFO - 📊 Database: poultry_control@localhost
+2025-12-14 20:51:25,976 - MQTTBridge - INFO - 📡 MQTT Broker: localhost:1883
+2025-12-14 20:51:25,976 - MQTTBridge - INFO - 🎯 Subscribed to 5 topics
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - Press Ctrl+C to stop...
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - ================================================================================
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 🚀 Starting MQTT bridge...
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - ✅ Connected to MQTT broker
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device1/sensors (QoS 1)
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device2/sensors (QoS 1)
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device3/sensors (QoS 1)
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 📡 Subscribed to: poultry/control/# (QoS 1)
+2025-12-14 20:51:25,977 - MQTTBridge - INFO - 📡 Subscribed to: poultry/status (QoS 1)
+2025-12-14 20:52:08,130 - MQTTBridge - INFO - 
+⏹️  Received interrupt signal. Shutting down...
+2025-12-14 20:52:08,130 - MQTTBridge - INFO - 🛑 Stopping MQTT bridge...
+2025-12-14 20:52:08,130 - MQTTBridge - INFO - 🔌 Disconnected from MQTT broker
+2025-12-14 20:52:08,130 - MQTTBridge - INFO - 🔒 Closing MySQL connection pool
+2025-12-14 20:52:08,130 - MQTTBridge - INFO - ✅ MQTT bridge stopped
+2025-12-14 20:52:15,535 - MQTTBridge - INFO - 🗄️  Initializing database connection...
+2025-12-14 20:52:15,543 - MQTTBridge - INFO - ✅ MySQL connection pool initialized
+2025-12-14 20:52:15,547 - MQTTBridge - INFO - 📡 Initializing MQTT bridge...
+2025-12-14 20:52:15,547 - MQTTBridge - INFO - 📡 MQTT client initialized
+2025-12-14 20:52:15,547 - MQTTBridge - INFO - 🔌 Connecting to MQTT broker at localhost:1883
+2025-12-14 20:52:15,547 - MQTTBridge - INFO - ✅ MQTT Bridge initialized successfully
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📊 Database: poultry_control@localhost
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📡 MQTT Broker: localhost:1883
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 🎯 Subscribed to 5 topics
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - Press Ctrl+C to stop...
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - ================================================================================
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 🚀 Starting MQTT bridge...
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - ✅ Connected to MQTT broker
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device1/sensors (QoS 1)
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device2/sensors (QoS 1)
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📡 Subscribed to: poultry/device3/sensors (QoS 1)
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📡 Subscribed to: poultry/control/# (QoS 1)
+2025-12-14 20:52:15,548 - MQTTBridge - INFO - 📡 Subscribed to: poultry/status (QoS 1)

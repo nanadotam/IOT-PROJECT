@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Poultry Control System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-card h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .test-button {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .test-button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .result.success {
+            border-left: 4px solid #00f2fe;
+        }
+
+        .result.error {
+            border-left: 4px solid #f5576c;
+            color: #f5576c;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .test-all {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .test-all button {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 API Test Suite</h1>
+
+        <div class="info-box">
+            <h3>📋 Instructions</h3>
+            <p>
+                This page tests all API endpoints for the Smart Poultry Heater Control System.
+                Click individual test buttons or "Run All Tests" to verify the API is working correctly.
+                Make sure XAMPP MySQL is running and the database is set up.
+            </p>
+        </div>
+
+        <div class="test-all">
+            <button class="test-button" onclick="runAllTests()">🚀 Run All Tests</button>
+        </div>
+
+        <div class="test-grid">
+            <div class="test-card">
+                <h2>1. Get Devices <span class="status pending" id="status-devices">Pending</span></h2>
+                <button class="test-button" onclick="testDevices()">Test Devices Endpoint</button>
+                <div class="result" id="result-devices"></div>
+            </div>
+
+            <div class="test-card">
+                <h2>2. Get Latest Readings <span class="status pending" id="status-latest">Pending</span></h2>
+                <button class="test-button" onclick="testLatest()">Test Latest Endpoint</button>
+                <div class="result" id="result-latest"></div>
+            </div>
+
+            <div class="test-card">
+                <h2>3. Get Statistics <span class="status pending" id="status-stats">Pending</span></h2>
+                <button class="test-button" onclick="testStats()">Test Stats Endpoint</button>
+                <div class="result" id="result-stats"></div>
+            </div>
+
+            <div class="test-card">
+                <h2>4. Get Readings <span class="status pending" id="status-readings">Pending</span></h2>
+                <button class="test-button" onclick="testReadings()">Test Readings Endpoint</button>
+                <div class="result" id="result-readings"></div>
+            </div>
+
+            <div class="test-card">
+                <h2>5. Get Device Stats <span class="status pending" id="status-device-stats">Pending</span></h2>
+                <button class="test-button" onclick="testDeviceStats()">Test Device Stats</button>
+                <div class="result" id="result-device-stats"></div>
+            </div>
+
+            <div class="test-card">
+                <h2>6. System Status <span class="status pending" id="status-system">Pending</span></h2>
+                <button class="test-button" onclick="testSystemStatus()">Test System Status</button>
+                <div class="result" id="result-system"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function testAPI(endpoint, name) {
+            const resultDiv = document.getElementById(`result-${name}`);
+            const statusSpan = document.getElementById(`status-${name}`);
+
+            resultDiv.textContent = 'Loading...';
+            resultDiv.className = 'result';
+            statusSpan.textContent = 'Testing...';
+            statusSpan.className = 'status pending';
+
+            try {
+                const response = await fetch(`api.php?action=${endpoint}`);
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    resultDiv.textContent = JSON.stringify(data, null, 2);
+                    resultDiv.className = 'result success';
+                    statusSpan.textContent = 'Success';
+                    statusSpan.className = 'status success';
+                } else {
+                    resultDiv.textContent = JSON.stringify(data, null, 2);
+                    resultDiv.className = 'result error';
+                    statusSpan.textContent = 'Error';
+                    statusSpan.className = 'status error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+                statusSpan.textContent = 'Failed';
+                statusSpan.className = 'status error';
+            }
+        }
+
+        function testDevices() {
+            testAPI('devices', 'devices');
+        }
+
+        function testLatest() {
+            testAPI('latest', 'latest');
+        }
+
+        function testStats() {
+            testAPI('stats', 'stats');
+        }
+
+        function testReadings() {
+            testAPI('readings&limit=10', 'readings');
+        }
+
+        function testDeviceStats() {
+            testAPI('device_stats', 'device-stats');
+        }
+
+        function testSystemStatus() {
+            testAPI('system_status', 'system');
+        }
+
+        async function runAllTests() {
+            console.log('🚀 Running all tests...');
+
+            await testDevices();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testLatest();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testStats();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testReadings();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testDeviceStats();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testSystemStatus();
+
+            console.log('✅ All tests completed!');
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('load', () => {
+            console.log('🧪 API Test Suite loaded. Click "Run All Tests" to begin.');
+        });
+    </script>
+</body>
+
+</html>

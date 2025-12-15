@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Smart Poultry Heater Control System - Monitor and control your poultry farm heating system with AI-powered automation">
+    <title>Smart Poultry Heater Control System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+                <span class="brand-text">Poultry<span class="brand-accent">AI</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#devices" class="nav-link">Devices</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+                <a href="#settings" class="nav-link">Settings</a>
+            </div>
+            <div class="nav-status">
+                <div class="status-indicator online"></div>
+                <span class="status-text">System Online</span>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Smart Poultry Heater Control
+                    <span class="gradient-text">Powered by AI</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Monitor temperature, humidity, and lighting in real-time.
+                    Let machine learning optimize your poultry farm's heating system.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-devices">3</div>
+                        <div class="stat-label">Active Devices</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="model-accuracy">85.7%</div>
+                        <div class="stat-label">Model Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="uptime">99.8%</div>
+                        <div class="stat-label">System Uptime</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <h2 class="section-title">Live Monitoring Dashboard</h2>
+
+            <!-- Environmental Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card temperature">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <div class="metric-info">
+                            <h3 class="metric-title">Temperature</h3>
+                            <p class="metric-subtitle">Average across all zones</p>
+                        </div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value-number" id="avg-temp">26.8</span>
+                        <span class="value-unit">°C</span>
+                    </div>
+                    <div class="metric-range">
+                        <span class="range-label">Range:</span>
+                        <span class="range-value" id="temp-range">18°C - 34°C</span>
+                    </div>
+                    <div class="metric-chart">
+                        <canvas id="temp-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="metric-card humidity">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                            </svg>
+                        </div>
+                        <div class="metric-info">
+                            <h3 class="metric-title">Humidity</h3>
+                            <p class="metric-subtitle">Relative humidity level</p>
+                        </div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value-number" id="avg-humidity">80.5</span>
+                        <span class="value-unit">%</span>
+                    </div>
+                    <div class="metric-range">
+                        <span class="range-label">Range:</span>
+                        <span class="range-value" id="humidity-range">68% - 100%</span>
+                    </div>
+                    <div class="metric-chart">
+                        <canvas id="humidity-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="metric-card light">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div class="metric-info">
+                            <h3 class="metric-title">Light Intensity</h3>
+                            <p class="metric-subtitle">LDR sensor readings</p>
+                        </div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value-number" id="avg-light">49.6</span>
+                        <span class="value-unit">%</span>
+                    </div>
+                    <div class="metric-range">
+                        <span class="range-label">Range:</span>
+                        <span class="range-value" id="light-range">0% - 96%</span>
+                    </div>
+                    <div class="metric-chart">
+                        <canvas id="light-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="metric-card heater">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                            </svg>
+                        </div>
+                        <div class="metric-info">
+                            <h3 class="metric-title">Heater Status</h3>
+                            <p class="metric-subtitle">AI-controlled heating</p>
+                        </div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value-number" id="heaters-on">0</span>
+                        <span class="value-unit">/ 3</span>
+                    </div>
+                    <div class="metric-range">
+                        <span class="range-label">Active:</span>
+                        <span class="range-value" id="heater-percentage">0%</span>
+                    </div>
+                    <div class="heater-status-grid">
+                        <div class="heater-indicator off" data-device="1"></div>
+                        <div class="heater-indicator off" data-device="2"></div>
+                        <div class="heater-indicator off" data-device="3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Devices Section -->
+        <section id="devices" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Field Devices</h2>
+                <button class="btn btn-primary" id="refresh-devices">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Refresh
+                </button>
+            </div>
+
+            <div class="devices-grid" id="devices-container">
+                <!-- Device cards will be dynamically generated -->
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section">
+            <h2 class="section-title">Analytics & Insights</h2>
+
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3 class="analytics-title">ML Model Performance</h3>
+                    <div class="model-metrics">
+                        <div class="model-metric">
+                            <span class="model-metric-label">Accuracy</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85.7%"></div>
+                            </div>
+                            <span class="model-metric-value">85.7%</span>
+                        </div>
+                        <div class="model-metric">
+                            <span class="model-metric-label">Precision</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 84.6%"></div>
+                            </div>
+                            <span class="model-metric-value">84.6%</span>
+                        </div>
+                        <div class="model-metric">
+                            <span class="model-metric-label">Recall</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 86.9%"></div>
+                            </div>
+                            <span class="model-metric-value">86.9%</span>
+                        </div>
+                        <div class="model-metric">
+                            <span class="model-metric-label">F1 Score</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85.7%"></div>
+                            </div>
+                            <span class="model-metric-value">85.7%</span>
+                        </div>
+                    </div>
+                    <div class="model-info">
+                        <p><strong>Model:</strong> Random Forest Classifier</p>
+                        <p><strong>Training Samples:</strong> 48,000</p>
+                        <p><strong>Features:</strong> Temperature, Humidity, LDR</p>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="analytics-title">Historical Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="historical-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="analytics-title">Prediction Confidence</h3>
+                    <div class="confidence-display">
+                        <div class="confidence-gauge">
+                            <svg class="gauge-svg" viewBox="0 0 200 120">
+                                <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100" fill="none"
+                                    stroke-width="20" />
+                                <path class="gauge-fill" id="confidence-arc" d="M 20 100 A 80 80 0 0 1 180 100"
+                                    fill="none" stroke="url(#gaugeGradient)" stroke-width="20" stroke-linecap="round" />
+                                <defs>
+                                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="gauge-value">
+                                <span class="gauge-number" id="confidence-value">92</span>
+                                <span class="gauge-unit">%</span>
+                            </div>
+                        </div>
+                        <p class="confidence-label">Average Prediction Confidence</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="section">
+            <h2 class="section-title">System Settings</h2>
+
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h3 class="settings-title">Control Mode</h3>
+                    <div class="control-mode-selector">
+                        <label class="radio-option">
+                            <input type="radio" name="control-mode" value="auto" checked>
+                            <span class="radio-label">
+                                <svg class="radio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                                <div>
+                                    <strong>Automatic (AI)</strong>
+                                    <p>Let the ML model control heaters</p>
+                                </div>
+                            </span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="control-mode" value="manual">
+                            <span class="radio-label">
+                                <svg class="radio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                </svg>
+                                <div>
+                                    <strong>Manual Override</strong>
+                                    <p>Control heaters manually</p>
+                                </div>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3 class="settings-title">Temperature Thresholds</h3>
+                    <div class="threshold-controls">
+                        <div class="threshold-input">
+                            <label for="min-temp">Minimum Temperature (°C)</label>
+                            <input type="number" id="min-temp" value="18" min="10" max="30">
+                        </div>
+                        <div class="threshold-input">
+                            <label for="max-temp">Maximum Temperature (°C)</label>
+                            <input type="number" id="max-temp" value="35" min="25" max="45">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3 class="settings-title">MQTT Configuration</h3>
+                    <div class="mqtt-config">
+                        <div class="config-input">
+                            <label for="mqtt-broker">Broker Address</label>
+                            <input type="text" id="mqtt-broker" value="192.168.1.100"
+                                placeholder="Enter MQTT broker IP">
+                        </div>
+                        <div class="config-input">
+                            <label for="mqtt-port">Port</label>
+                            <input type="number" id="mqtt-port" value="1883" placeholder="1883">
+                        </div>
+                        <button class="btn btn-secondary">Test Connection</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Smart Poultry Heater Control System. Powered by Machine Learning.</p>
+            <p class="footer-meta">Model: Random Forest | Accuracy: 85.7% | Uptime: 99.8%</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
